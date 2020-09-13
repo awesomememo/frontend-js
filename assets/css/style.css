@@ -1,6 +1,11 @@
 body {
   font-family: "Roboto", sans-serif;
   overflow: hidden;
+  min-height: 100vh;
+}
+
+#word {
+  overflow-x: hidden;
 }
 
 main {
@@ -8,6 +13,10 @@ main {
   height: 100vh;
   position: relative;
   overflow: hidden;
+}
+
+#word-main {
+  margin-top: 5rem;
 }
 
 main::after {
@@ -23,4 +32,32 @@ main::after {
 
 #welcome {
   height: 100%;
+}
+
+.line {
+  display: block;
+  height: 1px;
+  background-color: black;
+}
+
+#verification,
+#loading {
+  display: none;
+}
+
+#word-main .container .card .col-sm-4 audio {
+  width: 100%;
+}
+
+#hint,
+#definition,
+#audio {
+  transition: all 0.5s ease-in-out;
+}
+
+#hint:hover,
+#definition:hover,
+#audio:hover {
+  cursor: pointer;
+  opacity: 0.5;
 }
