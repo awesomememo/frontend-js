@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# local development DB
+db
+
+# vscode editor
+.vscode

@@ -1,10 +1,12 @@
 {
   "name": "frontend",
   "version": "1.0.0",
-  "description": "Awesomememo frontend",
+  "description": "Front end of awesomememo",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "(json-server --watch ./db/db.json &) && webpack-dev-server --output-public-path=/build/  --mode development --progress --open --hot",
+    "build": "webpack --mode development --progress"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,17 @@
   "bugs": {
     "url": "https://github.com/awesomememo/frontend-js/issues"
   },
-  "homepage": "https://github.com/awesomememo/frontend-js#readme"
+  "homepage": "https://github.com/awesomememo/frontend-js#readme",
+  "dependencies": {
+    "json-server": "^0.16.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "babel-loader": "^8.0.5",
+    "@babel/polyfill": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.10"
+  }
 }

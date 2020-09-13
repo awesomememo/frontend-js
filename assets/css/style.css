@@ -1,0 +1,26 @@
+body {
+  font-family: "Roboto", sans-serif;
+  overflow: hidden;
+}
+
+main {
+  background: rgba(0, 0, 0, 0.2);
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+main::after {
+  content: "";
+  background: url("../img/welcome-bg.jpg") no-repeat center center/cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+#welcome {
+  height: 100%;
+}
