@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -3553,25 +3553,86 @@ eval("/**\n * Copyright (c) 2014-present, Facebook, Inc.\n *\n * This source cod
 
 /***/ }),
 
-/***/ "./src/app.js":
-/*!********************!*\
-  !*** ./src/app.js ***!
-  \********************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./src/insertWord.js":
+/*!***************************!*\
+  !*** ./src/insertWord.js ***!
+  \***************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("\n\n//# sourceURL=webpack:///./src/app.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _ui_InsertWordUI__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ui/InsertWordUI */ \"./src/ui/InsertWordUI.js\");\n/* harmony import */ var _service_WordService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./service/WordService */ \"./src/service/WordService.js\");\n\n\nvar insertUi = new _ui_InsertWordUI__WEBPACK_IMPORTED_MODULE_0__[\"default\"](document);\nvar wordService = new _service_WordService__WEBPACK_IMPORTED_MODULE_1__[\"default\"]();\ninsertUi.init();\ninsertUi.clearBtn.addEventListener(\"click\", function () {\n  return insertUi.clear();\n});\ninsertUi.addWordBtn.addEventListener(\"click\", function () {\n  var word = insertUi.createWord();\n  wordService.saveWord(word);\n  insertUi.clear();\n});\ninsertUi.doneBtn.addEventListener(\"click\", function () {\n  return insertUi.closeStream();\n});\n\n//# sourceURL=webpack:///./src/insertWord.js?");
 
 /***/ }),
 
-/***/ 0:
-/*!******************************************!*\
-  !*** multi @babel/polyfill ./src/app.js ***!
-  \******************************************/
+/***/ "./src/lib/EasyHttp.js":
+/*!*****************************!*\
+  !*** ./src/lib/EasyHttp.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return EasyHttp; });\nfunction asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }\n\nfunction _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"next\", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"throw\", err); } _next(undefined); }); }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nvar EasyHttp = /*#__PURE__*/function () {\n  function EasyHttp(url) {\n    _classCallCheck(this, EasyHttp);\n\n    this.url = url;\n  }\n\n  _createClass(EasyHttp, [{\n    key: \"add\",\n    value: function () {\n      var _add = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(item) {\n        var response;\n        return regeneratorRuntime.wrap(function _callee$(_context) {\n          while (1) {\n            switch (_context.prev = _context.next) {\n              case 0:\n                _context.next = 2;\n                return fetch(this.url, {\n                  method: \"POST\",\n                  body: JSON.stringify(item),\n                  headers: {\n                    \"content-type\": \"application/json\"\n                  }\n                });\n\n              case 2:\n                response = _context.sent;\n                _context.next = 5;\n                return response.json();\n\n              case 5:\n                return _context.abrupt(\"return\", _context.sent);\n\n              case 6:\n              case \"end\":\n                return _context.stop();\n            }\n          }\n        }, _callee, this);\n      }));\n\n      function add(_x) {\n        return _add.apply(this, arguments);\n      }\n\n      return add;\n    }()\n  }, {\n    key: \"delete\",\n    value: function () {\n      var _delete2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(id) {\n        return regeneratorRuntime.wrap(function _callee2$(_context2) {\n          while (1) {\n            switch (_context2.prev = _context2.next) {\n              case 0:\n                _context2.next = 2;\n                return fetch(\"\".concat(this.url, \"/\").concat(id), {\n                  method: \"DELETE\",\n                  headers: {\n                    \"content-type\": \"application/json\"\n                  }\n                });\n\n              case 2:\n              case \"end\":\n                return _context2.stop();\n            }\n          }\n        }, _callee2, this);\n      }));\n\n      function _delete(_x2) {\n        return _delete2.apply(this, arguments);\n      }\n\n      return _delete;\n    }()\n  }, {\n    key: \"update\",\n    value: function () {\n      var _update = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id, item) {\n        var response;\n        return regeneratorRuntime.wrap(function _callee3$(_context3) {\n          while (1) {\n            switch (_context3.prev = _context3.next) {\n              case 0:\n                _context3.next = 2;\n                return fetch(\"\".concat(this.url, \"/\").concat(id), {\n                  method: \"PUT\",\n                  body: JSON.stringify(item),\n                  headers: {\n                    \"content-type\": \"application/json\"\n                  }\n                });\n\n              case 2:\n                response = _context3.sent;\n                _context3.next = 5;\n                return response.json();\n\n              case 5:\n                return _context3.abrupt(\"return\", _context3.sent);\n\n              case 6:\n              case \"end\":\n                return _context3.stop();\n            }\n          }\n        }, _callee3, this);\n      }));\n\n      function update(_x3, _x4) {\n        return _update.apply(this, arguments);\n      }\n\n      return update;\n    }()\n  }]);\n\n  return EasyHttp;\n}();\n\n\n\n//# sourceURL=webpack:///./src/lib/EasyHttp.js?");
+
+/***/ }),
+
+/***/ "./src/lib/Util.js":
+/*!*************************!*\
+  !*** ./src/lib/Util.js ***!
+  \*************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Util; });\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nvar Util = /*#__PURE__*/function () {\n  function Util() {\n    _classCallCheck(this, Util);\n  }\n\n  _createClass(Util, null, [{\n    key: \"b64toBlob\",\n    value: function b64toBlob(b64Data) {\n      var contentType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : \"\";\n      var sliceSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 512;\n      var byteCharacters = atob(b64Data);\n      var byteArrays = [];\n\n      for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {\n        var slice = byteCharacters.slice(offset, offset + sliceSize);\n        var byteNumbers = new Array(slice.length);\n\n        for (var i = 0; i < slice.length; i++) {\n          byteNumbers[i] = slice.charCodeAt(i);\n        }\n\n        var byteArray = new Uint8Array(byteNumbers);\n        byteArrays.push(byteArray);\n      }\n\n      var blob = new Blob(byteArrays, {\n        type: contentType\n      });\n      return blob;\n    }\n  }]);\n\n  return Util;\n}();\n\n\n\n//# sourceURL=webpack:///./src/lib/Util.js?");
+
+/***/ }),
+
+/***/ "./src/model/Item.js":
+/*!***************************!*\
+  !*** ./src/model/Item.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Item; });\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nvar Item = /*#__PURE__*/function () {\n  function Item(name, description) {\n    _classCallCheck(this, Item);\n\n    this.name = name;\n    this.description = description;\n  }\n\n  _createClass(Item, [{\n    key: \"setId\",\n    value: function setId(id) {\n      this.id = id;\n    }\n  }, {\n    key: \"setSound\",\n    value: function setSound(sound) {\n      this.sound = sound;\n    }\n  }, {\n    key: \"setImage\",\n    value: function setImage(image) {\n      this.image = image;\n    }\n  }, {\n    key: \"setHint\",\n    value: function setHint(hint) {\n      this.hint = hint;\n    }\n  }]);\n\n  return Item;\n}();\n\n\n\n//# sourceURL=webpack:///./src/model/Item.js?");
+
+/***/ }),
+
+/***/ "./src/service/WordService.js":
+/*!************************************!*\
+  !*** ./src/service/WordService.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return WordService; });\n/* harmony import */ var _lib_EasyHttp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/EasyHttp */ \"./src/lib/EasyHttp.js\");\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\nvar wordUrl = \"http://localhost:3000/words\";\n\nvar WordService = /*#__PURE__*/function () {\n  function WordService() {\n    _classCallCheck(this, WordService);\n\n    this.client = new _lib_EasyHttp__WEBPACK_IMPORTED_MODULE_0__[\"default\"](wordUrl);\n  }\n\n  _createClass(WordService, [{\n    key: \"saveWord\",\n    value: function saveWord(word) {\n      this.client.add(word);\n    }\n  }]);\n\n  return WordService;\n}();\n\n\n\n//# sourceURL=webpack:///./src/service/WordService.js?");
+
+/***/ }),
+
+/***/ "./src/ui/InsertWordUI.js":
+/*!********************************!*\
+  !*** ./src/ui/InsertWordUI.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return InsertWordUI; });\n/* harmony import */ var _lib_Util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/Util */ \"./src/lib/Util.js\");\n/* harmony import */ var _model_Item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../model/Item */ \"./src/model/Item.js\");\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\n\n\nvar InsertWordUI = /*#__PURE__*/function () {\n  function InsertWordUI(document) {\n    _classCallCheck(this, InsertWordUI);\n\n    this.document = document;\n    this.item = document.getElementById(\"item\");\n    this.itemDescription = document.getElementById(\"item-description\");\n    this.exampleSentence = document.getElementById(\"example-sentence\");\n    this.player = document.getElementById(\"player\");\n    this.recordBtn = document.getElementById(\"record\");\n    this.stopBtn = document.getElementById(\"stop\");\n    this.addWordBtn = document.getElementById(\"add-word-btn\");\n    this.clearBtn = document.getElementById(\"clear\");\n    this.doneBtn = document.getElementById(\"done\");\n    this.chunks = [];\n    this.contentType = \"audio/ogg; codecs=opus\";\n    this.fileReader = new FileReader();\n    this.mediaRecorder;\n    this.stream;\n  }\n\n  _createClass(InsertWordUI, [{\n    key: \"closeStream\",\n    value: function closeStream() {\n      console.log(stream.state);\n    }\n  }, {\n    key: \"clear\",\n    value: function clear() {\n      this.item.value = \"\";\n      this.itemDescription.value = \"\";\n      this.exampleSentence.value = \"\";\n      this.player.src = \"\";\n      this.savedEncoding64 = \"\";\n    }\n  }, {\n    key: \"init\",\n    value: function init() {\n      var _this = this;\n\n      // 1. Initalize audio stream into mediaRecorder\n      navigator.mediaDevices.getUserMedia({\n        audio: true,\n        video: false\n      }).then(function (stream) {\n        _this.stream = stream;\n        _this.mediaRecorder = new MediaRecorder(stream);\n\n        _this.mediaRecorder.addEventListener(\"dataavailable\", function (e) {\n          _this.chunks.push(e.data);\n        }); // 1.1 Create Blob, feed to file reader, and attach to audio player\n\n\n        _this.mediaRecorder.addEventListener(\"stop\", function () {\n          var blob = new Blob(_this.chunks, {\n            type: _this.contentType\n          });\n\n          _this.fileReader.readAsDataURL(blob);\n\n          _this.chunks = [];\n          var audioUrl = window.URL.createObjectURL(blob);\n          _this.player.src = audioUrl;\n        });\n      }); // 2. Get encoded64 audio string\n\n      this.fileReader.addEventListener(\"loadend\", function () {\n        _this.savedEncoding64 = _this.fileReader.result.split(\",\")[1];\n      });\n      console.log(this.recordBtn); // 3. Start mediaRecorder\n\n      this.recordBtn.addEventListener(\"click\", function () {\n        if (_this.mediaRecorder.state === \"recording\") {\n          return;\n        }\n\n        _this.mediaRecorder.start();\n      }); // 4. Stop mediaRecorder\n\n      this.stopBtn.addEventListener(\"click\", function () {\n        if (_this.mediaRecorder.state === \"inactive\") {\n          return;\n        }\n\n        _this.mediaRecorder.stop();\n      });\n    }\n  }, {\n    key: \"createWord\",\n    value: function createWord() {\n      var name = this.item.value;\n      var description = this.itemDescription.value;\n      var exampleSentence = this.exampleSentence.value;\n      var sound = this.savedEncoding64;\n      var item = new _model_Item__WEBPACK_IMPORTED_MODULE_1__[\"default\"](name, description);\n      item.setSound(sound);\n      item.setHint(exampleSentence);\n      return item;\n    }\n  }]);\n\n  return InsertWordUI;\n}();\n\n\n\n//# sourceURL=webpack:///./src/ui/InsertWordUI.js?");
+
+/***/ }),
+
+/***/ 1:
+/*!*************************************************!*\
+  !*** multi @babel/polyfill ./src/insertWord.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! @babel/polyfill */\"./node_modules/@babel/polyfill/lib/index.js\");\nmodule.exports = __webpack_require__(/*! ./src/app.js */\"./src/app.js\");\n\n\n//# sourceURL=webpack:///multi_@babel/polyfill_./src/app.js?");
+eval("__webpack_require__(/*! @babel/polyfill */\"./node_modules/@babel/polyfill/lib/index.js\");\nmodule.exports = __webpack_require__(/*! ./src/insertWord.js */\"./src/insertWord.js\");\n\n\n//# sourceURL=webpack:///multi_@babel/polyfill_./src/insertWord.js?");
 
 /***/ })
 
