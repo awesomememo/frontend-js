@@ -1,7 +1,11 @@
+import Progress from "./Progress";
+
 export default class Item {
-  constructor(name, description) {
+  constructor(name, description, createTime) {
     this.name = name;
     this.description = description;
+    this.createTime = createTime;
+    this.progresses = [];
   }
 
   setId(id) {
@@ -18,5 +22,9 @@ export default class Item {
 
   setHint(hint) {
     this.hint = hint;
+  }
+
+  addProgress(progress) {
+    this.progresses.push(progress);
   }
 }
