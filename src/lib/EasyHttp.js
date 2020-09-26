@@ -35,4 +35,9 @@ export default class EasyHttp {
 
     return await response.json();
   }
+
+  async get(id) {
+    const respones = await fetch(`${this.url}/${id}`);
+    return await respones.json();
+  }
 }

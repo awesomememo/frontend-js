@@ -77,8 +77,9 @@ export default class InsertWordUI {
     const description = this.itemDescription.value;
     const exampleSentence = this.exampleSentence.value;
     const sound = this.savedEncoding64;
+    const date = new Date();
 
-    const item = new Item(name, description);
+    const item = new Item(name, description, date);
     item.setSound(sound);
     item.setHint(exampleSentence);
     return item;

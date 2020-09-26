@@ -25,12 +25,12 @@
 
     <link rel="stylesheet" href="../css/style.css" />
 
-    <title>Add Word</title>
+    <title>Word List</title>
   </head>
   <body>
     <nav class="navbar navbar-dark bg-primary fixed-top">
       <div class="container">
-        <a href="#" class="navbar-brand">Add Word</a>
+        <a href="#" class="navbar-brand">Word List</a>
         <button
           class="navbar-toggler"
           data-target="#drop-down-menu"
@@ -62,49 +62,33 @@
 
     <main id="word-main">
       <div class="container">
-        <div class="card p-2 mt-3">
-          <h1 class="mx-auto">Add a Word!</h1>
-          <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              id="item"
-              placeholder="word"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              id="item-description"
-              placeholder="definition"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              id="example-sentence"
-              placeholder="example sentence"
-            />
-          </div>
-          <div class="row">
-            <div class="col-sm-2 mb-3 text-center">
-              <button class="btn btn-danger" id="record">Record</button>
-              <button class="btn btn-primary" id="stop">Stop</button>
+        <div class="card p-2 mt-3" id="word-template">
+          <div class="card-body">
+            <h1>What's the word?</h1>
+            <p id="definition"></p>
+            <i class="far fa-question-circle fa-2x text-warning" id="hint"></i>
+            &nbsp;
+            <span id="hint-text"></span>
+            <br />
+            <br />
+            <i class="fas fa-atlas fa-2x text-secondary" id="definition"></i>
+            &nbsp;
+            <span id="definition-text"></span>
+            <br />
+            <br />
+            <i class="fas fa-volume-up fa-2x text-primary" id="audio"></i>
+            <audio id="audio-element" class="d-none" controls></audio>
+            &nbsp;
+            <span id="hint"></span>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                id="word"
+                placeholder="word"
+              />
             </div>
-            <div class="col-sm-4">
-              <audio id="player" controls></audio>
-            </div>
-          </div>
-          <div class="line mb-3 mt-3"></div>
-
-          <div class="text-center">
-            <button class="btn btn-primary mr-3" id="add-word-btn">
-              Add Word
-            </button>
-            <button class="btn btn-warning mr-3" id="clear">Clear</button>
-            <a href="../../index.html" class="btn btn-success">Done</a>
+            <button class="btn btn-success btn-small">Submit</button>
           </div>
         </div>
       </div>
@@ -126,6 +110,6 @@
       integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
       crossorigin="anonymous"
     ></script>
-    <script src="../../build/insertWord.bundle.js"></script>
+    <script src="../../build/wordList.bundle.js"></script>
   </body>
 </html>
