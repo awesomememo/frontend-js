@@ -15,7 +15,10 @@ main {
   overflow: hidden;
 }
 
-#word-main {
+#word-main,
+#login-main,
+#register-main,
+#settings-main {
   margin-top: 5rem;
 }
 
@@ -41,7 +44,16 @@ main::after {
 }
 
 #verification,
-#loading {
+#loading,
+#login-not-filled-alert,
+#login-failure,
+#register-not-filled-alert,
+#email-alert,
+#username-alert,
+#password-alert,
+#logout,
+#settings,
+#settings-password-alert {
   display: none;
 }
 
@@ -60,4 +72,14 @@ main::after {
 #audio:hover {
   cursor: pointer;
   opacity: 0.5;
+}
+
+#login-not-filled-alert,
+#login-failure,
+#register-not-filled-alert,
+#email-alert,
+#username-alert,
+#password-alert,
+#settings-password-alert {
+  background-color: rgba(236, 132, 132, 0.728);
 }
