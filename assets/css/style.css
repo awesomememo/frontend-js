@@ -1,6 +1,5 @@
 body {
   font-family: "Roboto", sans-serif;
-  overflow: hidden;
   min-height: 100vh;
 }
 
@@ -10,13 +9,14 @@ body {
 
 main {
   background: rgba(0, 0, 0, 0.2);
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   overflow: hidden;
+  padding-top: 7rem;
 }
 
-#word-main {
-  margin-top: 5rem;
+#quiz-main {
+  overflow: auto;
 }
 
 main::after {
@@ -40,11 +40,6 @@ main::after {
   background-color: black;
 }
 
-#verification,
-#loading {
-  display: none;
-}
-
 #word-main .container .card .col-sm-4 audio {
   width: 100%;
 }
@@ -60,4 +55,24 @@ main::after {
 #audio:hover {
   cursor: pointer;
   opacity: 0.5;
+}
+
+#word-template {
+  display: none;
+  margin-top: 6rem;
+}
+
+#start {
+  margin-top: 18rem;
+}
+
+.quiz-text {
+  font-size: x-large;
+}
+
+#validation,
+#finish,
+#no-word-left {
+  margin-top: 10rem;
+  display: none;
 }

@@ -1,5 +1,3 @@
-import Progress from "./Progress";
-
 export default class Item {
   constructor(name, description, createTime) {
     this.name = name;

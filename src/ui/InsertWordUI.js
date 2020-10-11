@@ -1,4 +1,3 @@
-import Util from "../lib/Util";
 import Item from "../model/Item";
 
 export default class InsertWordUI {
@@ -16,6 +15,8 @@ export default class InsertWordUI {
     this.contentType = "audio/ogg; codecs=opus";
     this.fileReader = new FileReader();
     this.mediaRecorder;
+
+    this.init();
   }
 
   clear() {
@@ -70,6 +71,9 @@ export default class InsertWordUI {
 
       this.mediaRecorder.stop();
     });
+
+    // 5. addEventListener
+    this.clearBtn.addEventListener("click", () => this.clear());
   }
 
   createWord() {
