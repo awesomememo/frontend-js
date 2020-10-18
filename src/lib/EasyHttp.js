@@ -3,6 +3,16 @@ export default class EasyHttp {
     this.url = url;
   }
 
+  async getAll() {
+    const res = await fetch(this.url);
+    const resJson = await res.json();
+    if (Array.isArray(resJson)) {
+      return resJson;
+    }
+
+    return [];
+  }
+
   async add(item) {
     const response = await fetch(this.url, {
       method: "POST",
@@ -11,7 +21,6 @@ export default class EasyHttp {
         "content-type": "application/json",
       },
     });
-
     return await response.json();
   }
 
@@ -36,13 +45,8 @@ export default class EasyHttp {
     return await response.json();
   }
 
-  async getItem(id) {
+  async getById(id) {
     const response = await fetch(`${this.url}/${id}`);
-    return await response.json();
-  }
-
-  async getAll() {
-    const response = await fetch(this.url);
     return await response.json();
   }
 }

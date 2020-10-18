@@ -12,11 +12,17 @@ main {
   min-height: 100vh;
   position: relative;
   overflow: hidden;
-  padding-top: 7rem;
 }
 
 #quiz-main {
   overflow: auto;
+}
+
+#word-main,
+#login-main,
+#register-main,
+#settings-main {
+  margin-top: 5rem;
 }
 
 main::after {
@@ -38,6 +44,19 @@ main::after {
   display: block;
   height: 1px;
   background-color: black;
+}
+
+#verification,
+#loading,
+#login-not-filled-alert,
+#login-failure,
+#register-not-filled-alert,
+#email-alert,
+#password-alert,
+#logout,
+#settings,
+#settings-password-alert {
+  display: none;
 }
 
 #word-main .container .card .col-sm-4 audio {
@@ -75,4 +94,13 @@ main::after {
 #no-word-left {
   margin-top: 10rem;
   display: none;
+}
+
+#login-not-filled-alert,
+#login-failure,
+#register-not-filled-alert,
+#email-alert,
+#password-alert,
+#settings-password-alert {
+  background-color: rgba(236, 132, 132, 0.728);
 }

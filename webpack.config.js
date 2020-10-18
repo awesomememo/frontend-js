@@ -5,6 +5,9 @@ module.exports = {
     index: ["@babel/polyfill", "./src/index.js"],
     insertWord: ["@babel/polyfill", "./src/insertWord.js"],
     quiz: ["@babel/polyfill", "./src/quiz.js"],
+    login: ["@babel/polyfill", "./src/login.js"],
+    register: ["@babel/polyfill", "./src/register.js"],
+    settings: ["@babel/polyfill", "./src/settings.js"],
   },
   output: {
     path: path.resolve(__dirname, "build"),
