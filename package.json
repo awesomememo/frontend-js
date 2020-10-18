@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/awesomememo/frontend-js#readme",
   "dependencies": {
-    "json-server": "^0.16.1"
+    "json-server": "^0.16.1",
+    "md5": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
