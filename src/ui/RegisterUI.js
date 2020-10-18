@@ -5,7 +5,6 @@ export default class RegisterUI {
         this.document = document;
         this.notFilledAlert = this.document.getElementById('register-not-filled-alert');
         this.emailAlert = this.document.getElementById('email-alert');
-        this.usernameAlert = this.document.getElementById('username-alert');
         this.passwordAlert = this.document.getElementById('password-alert');
         this.email = this.document.getElementById('email');
         this.username = this.document.getElementById('username');
@@ -18,24 +17,12 @@ export default class RegisterUI {
         this.showAlert(this.emailAlert);
     }
 
-    showUsernameAlert() {
-        this.showAlert(this.usernameAlert);
-    }
-
     checkIfInputFilled() {
         if ((this.email.value === '') || (this.username.value === '') || (this.password.value === '') || (this.confirmPassword.value === '')) {
             this.showAlert(this.notFilledAlert);
             return false;
         }
         return true;
-    }
-
-    checkPasswords() {
-        if (this.password.value === this.confirmPassword.value) {
-            return true;
-        }
-        this.showAlert(this.passwordAlert);
-        return false;
     }
 
     showAlert(alert) {
@@ -51,9 +38,10 @@ export default class RegisterUI {
     }
 
     createUser() {
-        if (this.checkPasswords()) {
+        if (this.password.value === this.confirmPassword.value) {
             return new User(this.username.value, this.email.value, this.password.value);
         }
+        this.showAlert(this.passwordAlert);
         return null;
     }
 }

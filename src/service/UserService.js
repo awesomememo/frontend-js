@@ -1,59 +1,56 @@
-// Need md5
+import md5 from 'md5';
 import EasyHttp from "../lib/EasyHttp";
+import User from '../model/User';
 
-export const PASSWORD_WRONG = 1;
-export const NO_ACCOUNT = 2;
-export const LOGIN_SUCCESS = 3;
 export default class UserService {
   constructor() {
     this.userClient = new EasyHttp("http://localhost:3000/users");
   }
 
-  async checkEmail(user) {
+  async checkEmail(email) {
     const users = await this.userClient.get();
-    if (users.map((currUser) => currUser.email).includes(user.email)) {
-      return false;
-    }
-    return true;
+    return users.some(currUser => currUser.email === email);
   }
 
-  async checkUsername(user) {
-    const users = await this.userClient.get();
-    if (
-      users.map((currUser) => currUser.username).includes(user.username)
-    ) {
-      return false;
-    }
-    return true;
-  }
-
-  async checkUser(email, password) {
-    const users = await this.userClient.get();
-    const user = users.find((currUser) => currUser.email === email);
-
-    // md5 the given password before checking
-    if (user && user.password === password) {
-      return LOGIN_SUCCESS;
-    }
-
-    if (!user) {
-      return NO_ACCOUNT;
-    }
-
-    return PASSWORD_WRONG;
+  static validatePassword(inputPassword, savedPassword) {
+    return md5(inputPassword) === savedPassword;
   }
 
   async addUser(user) {
-    // md5 the password before adding user
-    return await this.userClient.add(user);
+    const plainObj = await this.userClient.add(UserService.hashPassword(user));
+    if (!plainObj) {
+      return null;
+    }
+    return Object.assign(new User(), plainObj);
   }
 
   async updateUser(id, newUser) {
-    return await this.userClient.update(id, newUser);
+    const plainObj = await this.userClient.update(id, UserService.hashPassword(newUser));
+    if (!plainObj) {
+      return null;
+    }
+    return Object.assign(new User(), plainObj);
   }
 
   async getUserByEmail(email) {
     const users = await this.userClient.get();
-    return users.find((currUser) => currUser.email === email);
+    const plainObj = users.find((currUser) => currUser.email === email);
+    if (!plainObj) {
+      return null;
+    }
+    return Object.assign(new User(), plainObj);
+  }
+
+  async getUserById(id) {
+    const plainObj = await this.userClient.getById(id);
+    if (!plainObj) {
+      return null;
+    }
+    return Object.assign(new User(), plainObj);
+  }
+
+  static hashPassword(user) {
+    user.password = md5(user.password);
+    return user;
   }
 }

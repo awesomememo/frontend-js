@@ -8,7 +8,7 @@ export default class IndexUI {
     this.settingsBtn = this.document.getElementById("settings");
   }
 
-  initPage(name) {
+  logIn(name) {
     this.nameEle.textContent = name;
     this.loginBtn.style.display = "none";
     this.registerBtn.style.display = "none";

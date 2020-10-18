@@ -1,26 +1,48 @@
-import UserService, {NO_ACCOUNT, PASSWORD_WRONG} from "./service/UserService";
+import { LOCALSTORAGE_KEY } from "./Constant";
+import UserService from "./service/UserService";
 import LoginUI from "./ui/LoginUI";
 
 const ui = new LoginUI(document);
 const userService = new UserService();
+let loginSuccess = null;
 
-ui.loginBtn.addEventListener("click", async () => {
-  if (!ui.checkIfInputFilled()) {
-    return;
-  }
-
-  const checkStatus = await userService.checkUser(ui.email.value, ui.password.value);
-  if (checkStatus === NO_ACCOUNT) {
-    ui.failure("User does not exist");
-  } else if (checkStatus === PASSWORD_WRONG) {
-    ui.failure("Password is wrong");
-  } else {
+ui.loginBtn.addEventListener("click", async (e) => {
+  if (loginSuccess) {
     const user = await userService.getUserByEmail(ui.email.value);
-    const id = user.id;
     ui.clearInputs();
-    localStorage.setItem('currUser', JSON.stringify(user));
+    localStorage.setItem(LOCALSTORAGE_KEY, user.id);
+    loginSuccess = null;
+  } else if (loginSuccess === null) {
+    e.preventDefault();
+    if (!ui.checkIfInputFilled()) {
+      loginSuccess = false;
+      ui.loginBtn.click();
+      return;
+    }
 
-    // See if better way (in case of changing localhost to somthing else)
-    window.location.assign('http://localhost:8080/index.html');
+    const user = await userService.getUserByEmail(ui.email.value);
+    if (!user) {
+      loginSuccess = false;
+      ui.failure("User does not exist");
+      ui.loginBtn.click();
+      return;
+    }
+
+    const isPasswordValid = UserService.validatePassword(
+      ui.password.value,
+      user.password
+    );
+
+    if (!isPasswordValid) {
+      loginSuccess = false;
+      ui.failure("Password is wrong");
+      ui.loginBtn.click();
+      return;
+    }
+    loginSuccess = true;
+    ui.loginBtn.click();
+  } else {
+    e.preventDefault();
+    loginSuccess = null;
   }
 });
