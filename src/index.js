@@ -1,5 +1,5 @@
 import { LOCALSTORAGE_KEY } from "./Constant";
-import IndexUI from "../src/ui/IndexUI";
+import IndexUI from "./ui/IndexUI";
 import UserService from "./service/UserService";
 
 const userService = new UserService();

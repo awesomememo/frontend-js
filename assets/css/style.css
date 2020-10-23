@@ -78,11 +78,6 @@ main::after {
 
 #word-template {
   display: none;
-  margin-top: 6rem;
-}
-
-#start {
-  margin-top: 18rem;
 }
 
 .quiz-text {
@@ -92,7 +87,6 @@ main::after {
 #validation,
 #finish,
 #no-word-left {
-  margin-top: 10rem;
   display: none;
 }
 

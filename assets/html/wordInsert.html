@@ -3,25 +3,14 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../css/bootstrap.css" />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
 
     <link rel="stylesheet" href="../css/style.css" />
 
@@ -31,11 +20,7 @@
     <nav class="navbar navbar-dark bg-primary fixed-top">
       <div class="container">
         <a href="#" class="navbar-brand">Add Word</a>
-        <button
-          class="navbar-toggler"
-          data-target="#drop-down-menu"
-          data-toggle="collapse"
-        >
+        <button class="navbar-toggler" data-target="#drop-down-menu" data-toggle="collapse">
           <span>
             <i class="fas fa-bars"></i>
           </span>
@@ -60,33 +45,18 @@
       </div>
     </nav>
 
-    <main id="word-main">
-      <div class="container">
-        <div class="card p-2 mt-3">
+    <main class="vh-100">
+      <div class="container d-flex justify-content-center align-items-center h-100">
+        <div class="card p-2">
           <h1 class="mx-auto">Add a Word!</h1>
           <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              id="item"
-              placeholder="word"
-            />
+            <input type="text" class="form-control" id="item" placeholder="word" />
           </div>
           <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              id="item-description"
-              placeholder="definition"
-            />
+            <input type="text" class="form-control" id="item-description" placeholder="definition" />
           </div>
           <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              id="example-sentence"
-              placeholder="example sentence"
-            />
+            <input type="text" class="form-control" id="example-sentence" placeholder="example sentence" />
           </div>
           <div class="row">
             <div class="col-sm-2 mb-3 text-center">
@@ -94,15 +64,13 @@
               <button class="btn btn-primary" id="stop">Stop</button>
             </div>
             <div class="col-sm-4">
-              <audio id="player" controls></audio>
+              <audio id="player" class="w-100" controls></audio>
             </div>
           </div>
           <div class="line mb-3 mt-3"></div>
 
           <div class="text-center">
-            <button class="btn btn-primary mr-3" id="add-word-btn">
-              Add Word
-            </button>
+            <button class="btn btn-primary mr-3" id="add-word-btn">Add Word</button>
             <button class="btn btn-warning mr-3" id="clear">Clear</button>
             <a href="../../index.html" class="btn btn-success">Done</a>
           </div>
@@ -111,21 +79,9 @@
     </main>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="../../build/insertWord.bundle.js"></script>
   </body>
 </html>

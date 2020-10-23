@@ -18,4 +18,18 @@ export default class Util {
     const blob = new Blob(byteArrays, { type: contentType });
     return blob;
   }
+
+  static getTodayDate() {
+    const date = new Date();
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  }
+
+  static toggleElement(element) {
+    if (element.style.display === "block") {
+      element.style.display = "none";
+      return;
+    }
+
+    element.style.display = "block";
+  }
 }

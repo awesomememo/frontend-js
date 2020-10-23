@@ -1,8 +1,11 @@
 import EasyHttp from "../lib/EasyHttp";
+import Util from "../lib/Util";
 import Item from "../model/Item";
 import Progress from "../model/Progress";
 
 const wordUrl = "http://localhost:3000/words";
+const dateDifference = [1, 2, 3, 5, 8, 13];
+const divisionForTheNumberOfDays = 1000 * 60 * 60 * 24;
 
 export default class WordService {
   constructor() {
@@ -10,27 +13,13 @@ export default class WordService {
   }
 
   saveWord(word) {
-    const createDate = new Date(
-      word.createTime.getFullYear(),
-      word.createTime.getMonth(),
-      word.createTime.getDate()
-    );
-    const item = new Item(word.name, word.description, createDate);
-    item.setHint(word.hint);
-    item.setSound(word.sound);
-    this.client.add(item);
+    this.client.add(word);
+    return word;
   }
 
   async get() {
     const plainObjs = await this.client.getAll();
-    return plainObjs.map((plainObj) => {
-      const item = Object.assign(new Item(), plainObj);
-      item.progresses = item.progresses.map((progress) =>
-        Object.assign(new Progress(), progress)
-      );
-
-      return item;
-    });
+    return plainObjs.map(Item.parseJSON);
   }
 
   updateWord(id, newWord) {
@@ -45,23 +34,17 @@ export default class WordService {
         return true;
       }
 
-      const lastProgressDate = progresses[progresses.length - 1].time;
+      const lastProgressDate = new Date(progresses[progresses.length - 1].time);
+      const lastProgress = progresses[progresses.length - 1];
 
-      const todayDateTime = new Date();
-      const todayDate = new Date(
-        todayDateTime.getFullYear(),
-        todayDateTime.getMonth(),
-        todayDateTime.getDate()
-      );
+      if (lastProgress.isPass === false) {
+        return true;
+      }
 
-      return (
-        todayDate - lastProgressDate === 1 ||
-        todayDate - lastProgressDate === 2 ||
-        todayDate - lastProgressDate === 3 ||
-        todayDate - lastProgressDate === 5 ||
-        todayDate - lastProgressDate === 8 ||
-        todayDate - lastProgressDate === 13
-      );
+      const todayDate = Util.getTodayDate();
+      const dayDifference = Math.floor((todayDate - lastProgressDate) / divisionForTheNumberOfDays);
+
+      return dateDifference.includes(dayDifference);
     });
 
     return newWordArray;

@@ -1,4 +1,5 @@
 import Item from "../model/Item";
+import Util from "../lib/Util";
 
 export default class InsertWordUI {
   constructor(document) {
@@ -29,25 +30,23 @@ export default class InsertWordUI {
 
   init() {
     // 1. Initalize audio stream into mediaRecorder
-    navigator.mediaDevices
-      .getUserMedia({ audio: true, video: false })
-      .then((stream) => {
-        this.mediaRecorder = new MediaRecorder(stream);
+    navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then((stream) => {
+      this.mediaRecorder = new MediaRecorder(stream);
 
-        this.mediaRecorder.addEventListener("dataavailable", (e) => {
-          this.chunks.push(e.data);
-        });
-
-        // 1.1 Create Blob, feed to file reader, and attach to audio player
-        this.mediaRecorder.addEventListener("stop", () => {
-          const blob = new Blob(this.chunks, { type: this.contentType });
-
-          this.fileReader.readAsDataURL(blob);
-          this.chunks = [];
-          const audioUrl = window.URL.createObjectURL(blob);
-          this.player.src = audioUrl;
-        });
+      this.mediaRecorder.addEventListener("dataavailable", (e) => {
+        this.chunks.push(e.data);
       });
+
+      // 1.1 Create Blob, feed to file reader, and attach to audio player
+      this.mediaRecorder.addEventListener("stop", () => {
+        const blob = new Blob(this.chunks, { type: this.contentType });
+
+        this.fileReader.readAsDataURL(blob);
+        this.chunks = [];
+        const audioUrl = window.URL.createObjectURL(blob);
+        this.player.src = audioUrl;
+      });
+    });
 
     // 2. Get encoded64 audio string
     this.fileReader.addEventListener("loadend", () => {
@@ -81,7 +80,7 @@ export default class InsertWordUI {
     const description = this.itemDescription.value;
     const exampleSentence = this.exampleSentence.value;
     const sound = this.savedEncoding64;
-    const date = new Date();
+    const date = Util.getTodayDate();
 
     const item = new Item(name, description, date);
     item.setSound(sound);

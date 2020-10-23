@@ -1,3 +1,5 @@
+import Progress from "./Progress";
+
 export default class Item {
   constructor(name, description, createTime) {
     this.name = name;
@@ -24,5 +26,12 @@ export default class Item {
 
   addProgress(progress) {
     this.progresses.push(progress);
+  }
+
+  static parseJSON(plainObj) {
+    const item = Object.assign(new Item(), plainObj);
+    const progresses = item.progresses.map(Progress.parseJSON);
+    item.progresses = progresses;
+    return item;
   }
 }

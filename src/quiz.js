@@ -1,18 +1,15 @@
 import QuizUI from "./ui/QuizUI";
 import WordService from "./service/WordService";
+import Util from "./lib/Util";
 import Progress from "./model/Progress";
 
 const quizUi = new QuizUI(document);
 const wordService = new WordService();
 let correctWord;
+let wordCount = 0;
 
 async function* wordGenerator() {
   const wordArray = await wordService.getTodayWord();
-  if (wordArray.length === 0) {
-    quizUi.noWordLeft();
-    return false;
-  }
-
   for (let word of wordArray) {
     yield word;
   }
@@ -22,53 +19,52 @@ const generator = wordGenerator();
 
 async function showWord() {
   const wordObj = await generator.next();
+
   const word = wordObj.value;
   const done = wordObj.done;
 
-  if (word === false) {
-    return;
-  }
-
   if (done) {
+    if (wordCount === 0) {
+      quizUi.noWordLeft();
+      return;
+    }
+
     quizUi.finish();
     return;
   }
 
+  wordCount++;
   quizUi.showItem(word);
   correctWord = word;
 }
 
-quizUi.startBtn.addEventListener("click", showWord);
-
-quizUi.submitBtn.addEventListener("click", async () => {
-  const isPass = quizUi.validate(correctWord);
-  const time = new Date();
-  const progress = new Progress(time, isPass);
-  const id = await correctWord.id;
-  correctWord.addProgress(progress);
-  wordService.updateWord(id, correctWord);
-});
-
-quizUi.nextBtn.addEventListener("click", showWord);
-
-quizUi.hint.addEventListener("click", () => {
-  if (quizUi.hintText.style.display === "block") {
-    quizUi.hintText.style.display = "none";
+quizUi.quizMain.addEventListener("click", (e) => {
+  if (e.target === quizUi.startBtn || e.target === quizUi.nextBtn) {
+    showWord();
     return;
   }
 
-  quizUi.hintText.style.display = "block";
-});
-
-quizUi.definition.addEventListener("click", () => {
-  if (quizUi.definitionText.style.display === "block") {
-    quizUi.definitionText.style.display = "none";
+  if (e.target === quizUi.submitBtn) {
+    const isPass = quizUi.validate(correctWord);
+    const time = Util.getTodayDate();
+    const progress = new Progress(time, isPass);
+    const id = correctWord.id;
+    correctWord.addProgress(progress);
+    wordService.updateWord(id, correctWord);
     return;
   }
 
-  quizUi.definitionText.style.display = "block";
-});
+  if (e.target === quizUi.hint) {
+    Util.toggleElement(quizUi.hintText);
+    return;
+  }
 
-quizUi.audio.addEventListener("click", () => {
-  quizUi.audioElement.play().catch(() => {});
+  if (e.target === quizUi.definition) {
+    Util.toggleElement(quizUi.definitionText);
+    return;
+  }
+
+  if (e.target === quizUi.audio) {
+    quizUi.audioElement.play().catch(() => {});
+  }
 });

@@ -21,25 +21,10 @@ export default class QuizUI {
     this.validation = document.getElementById("validation");
     this.validationHeader = document.getElementById("validation-header");
     this.validationWord = document.getElementById("validation-word");
-    this.validationDefinition = document.getElementById(
-      "validation-definition"
-    );
+    this.validationDefinition = document.getElementById("validation-definition");
     this.validationBody = document.getElementById("validation-body");
     this.nextBtn = document.getElementById("next-btn");
     this.finishTemplate = document.getElementById("finish");
-  }
-
-  clearWordTemplate() {
-    this.wordInput.value = "";
-    this.hintText.style.display = "none";
-    this.definitionText.style.display = "none";
-    this.audioElement.src = "";
-
-    this.start.style.display = "none";
-    this.wordTemplate.style.display = "block";
-    this.validation.style.display = "none";
-    this.finishTemplate.style.display = "none";
-    this.noWordsLeft.style.display = "none";
   }
 
   showItem(item) {
@@ -78,7 +63,7 @@ export default class QuizUI {
       this.validationHeader.className = "text-success text-center";
       this.validationBody.className = "text-success text-center";
       this.validationHeader.innerHTML = `
-        Correct! <i class="far fa-check-circle"></i>
+      Correct! <i class="far fa-check-circle"></i>
       `;
       return true;
     }
@@ -86,7 +71,7 @@ export default class QuizUI {
     this.validationBody.className = "text-danger text-center";
     this.validationHeader.className = "text-danger text-center";
     this.validationHeader.innerHTML = `
-      Wrong <i class="far fa-times-circle"></i>
+    Wrong <i class="far fa-times-circle"></i>
     `;
     return false;
   }
@@ -105,5 +90,18 @@ export default class QuizUI {
     this.validation.style.display = "none";
     this.finishTemplate.style.display = "none";
     this.start.style.display = "none";
+  }
+
+  clearWordTemplate() {
+    this.wordInput.value = "";
+    this.hintText.style.display = "none";
+    this.definitionText.style.display = "none";
+    this.audioElement.src = "";
+
+    this.start.style.display = "none";
+    this.wordTemplate.style.display = "block";
+    this.validation.style.display = "none";
+    this.finishTemplate.style.display = "none";
+    this.noWordsLeft.style.display = "none";
   }
 }
