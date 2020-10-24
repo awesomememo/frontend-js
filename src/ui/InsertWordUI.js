@@ -4,6 +4,7 @@ import Util from "../lib/Util";
 export default class InsertWordUI {
   constructor(document) {
     this.document = document;
+    this.container = document.getElementById("main-container");
     this.item = document.getElementById("item");
     this.itemDescription = document.getElementById("item-description");
     this.exampleSentence = document.getElementById("example-sentence");
@@ -75,6 +76,16 @@ export default class InsertWordUI {
     this.clearBtn.addEventListener("click", () => this.clear());
   }
 
+  checkInputs() {
+    if (!this.item.value) {
+      return null;
+    }
+
+    if (!this.itemDescription.value && !this.exampleSentence.value && !this.player.src) {
+      return null;
+    }
+  }
+
   createWord() {
     const name = this.item.value;
     const description = this.itemDescription.value;
@@ -86,5 +97,23 @@ export default class InsertWordUI {
     item.setSound(sound);
     item.setHint(exampleSentence);
     return item;
+  }
+
+  showAlert(alertMessage, alertType) {
+    if (this.document.getElementsByClassName(`alert alert-dismissible alert-${alertType}`)[0]) {
+      return;
+    }
+
+    const alertDiv = document.createElement("DIV");
+    alertDiv.className = `alert alert-dismissible alert-${alertType}`;
+    alertDiv.innerHTML = `
+    <button class="close" data-dismiss="alert">&times;</button>
+    ${alertMessage}
+    `;
+    this.container.insertBefore(alertDiv, this.item);
+
+    setTimeout(() => {
+      alertDiv.remove();
+    }, 3000);
   }
 }
