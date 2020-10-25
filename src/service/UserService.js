@@ -1,6 +1,6 @@
-import md5 from 'md5';
+import md5 from "md5";
 import EasyHttp from "../lib/EasyHttp";
-import User from '../model/User';
+import User from "../model/User";
 
 export default class UserService {
   constructor() {
@@ -8,8 +8,8 @@ export default class UserService {
   }
 
   async checkEmail(email) {
-    const users = await this.userClient.get();
-    return users.some(currUser => currUser.email === email);
+    const users = await this.userClient.getAll();
+    return users.some((currUser) => currUser.email === email);
   }
 
   static validatePassword(inputPassword, savedPassword) {
@@ -33,7 +33,7 @@ export default class UserService {
   }
 
   async getUserByEmail(email) {
-    const users = await this.userClient.get();
+    const users = await this.userClient.getAll();
     const plainObj = users.find((currUser) => currUser.email === email);
     if (!plainObj) {
       return null;

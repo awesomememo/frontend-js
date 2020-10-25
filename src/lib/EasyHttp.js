@@ -3,9 +3,14 @@ export default class EasyHttp {
     this.url = url;
   }
 
-  async get() {
+  async getAll() {
     const res = await fetch(this.url);
-    return await res.json();
+    const resJson = await res.json();
+    if (Array.isArray(resJson)) {
+      return resJson;
+    }
+
+    return [];
   }
 
   async add(item) {
@@ -13,8 +18,8 @@ export default class EasyHttp {
       method: "POST",
       body: JSON.stringify(item),
       headers: {
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     });
     return await response.json();
   }
@@ -23,8 +28,8 @@ export default class EasyHttp {
     await fetch(`${this.url}/${id}`, {
       method: "DELETE",
       headers: {
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     });
   }
 
@@ -33,15 +38,15 @@ export default class EasyHttp {
       method: "PUT",
       body: JSON.stringify(item),
       headers: {
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     });
 
     return await response.json();
   }
 
   async getById(id) {
-    const respones = await fetch(`${this.url}/${id}`);
-    return await respones.json();
+    const response = await fetch(`${this.url}/${id}`);
+    return await response.json();
   }
 }

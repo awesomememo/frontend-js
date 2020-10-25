@@ -1,6 +1,5 @@
 body {
   font-family: "Roboto", sans-serif;
-  overflow: hidden;
   min-height: 100vh;
 }
 
@@ -10,9 +9,13 @@ body {
 
 main {
   background: rgba(0, 0, 0, 0.2);
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   overflow: hidden;
+}
+
+#quiz-main {
+  overflow: auto;
 }
 
 #word-main,
@@ -71,6 +74,20 @@ main::after {
 #audio:hover {
   cursor: pointer;
   opacity: 0.5;
+}
+
+#word-template {
+  display: none;
+}
+
+.quiz-text {
+  font-size: x-large;
+}
+
+#validation,
+#finish,
+#no-word-left {
+  display: none;
 }
 
 #login-not-filled-alert,
