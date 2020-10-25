@@ -4,14 +4,14 @@ module.exports = {
   entry: {
     index: ["@babel/polyfill", "./src/index.js"],
     insertWord: ["@babel/polyfill", "./src/insertWord.js"],
-    wordList: ["@babel/polyfill", "./src/wordList.js"],
+    quiz: ["@babel/polyfill", "./src/quiz.js"],
     login: ["@babel/polyfill", "./src/login.js"],
     register: ["@babel/polyfill", "./src/register.js"],
-    settings: ["@babel/polyfill", "./src/settings.js"]
+    settings: ["@babel/polyfill", "./src/settings.js"],
   },
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "[name].bundle.js"
+    filename: "[name].bundle.js",
   },
   module: {
     rules: [
@@ -20,9 +20,9 @@ module.exports = {
         exclude: /node_modules/,
         loader: "babel-loader",
         query: {
-          presets: ["@babel/preset-env"]
-        }
-      }
-    ]
-  }
+          presets: ["@babel/preset-env"],
+        },
+      },
+    ],
+  },
 };

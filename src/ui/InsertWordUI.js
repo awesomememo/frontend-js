@@ -1,9 +1,10 @@
-import Util from "../lib/Util";
 import Item from "../model/Item";
+import Util from "../lib/Util";
 
 export default class InsertWordUI {
   constructor(document) {
     this.document = document;
+    this.container = document.getElementById("main-container");
     this.item = document.getElementById("item");
     this.itemDescription = document.getElementById("item-description");
     this.exampleSentence = document.getElementById("example-sentence");
@@ -16,6 +17,8 @@ export default class InsertWordUI {
     this.contentType = "audio/ogg; codecs=opus";
     this.fileReader = new FileReader();
     this.mediaRecorder;
+
+    this.init();
   }
 
   clear() {
@@ -28,25 +31,23 @@ export default class InsertWordUI {
 
   init() {
     // 1. Initalize audio stream into mediaRecorder
-    navigator.mediaDevices
-      .getUserMedia({ audio: true, video: false })
-      .then((stream) => {
-        this.mediaRecorder = new MediaRecorder(stream);
+    navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then((stream) => {
+      this.mediaRecorder = new MediaRecorder(stream);
 
-        this.mediaRecorder.addEventListener("dataavailable", (e) => {
-          this.chunks.push(e.data);
-        });
-
-        // 1.1 Create Blob, feed to file reader, and attach to audio player
-        this.mediaRecorder.addEventListener("stop", () => {
-          const blob = new Blob(this.chunks, { type: this.contentType });
-
-          this.fileReader.readAsDataURL(blob);
-          this.chunks = [];
-          const audioUrl = window.URL.createObjectURL(blob);
-          this.player.src = audioUrl;
-        });
+      this.mediaRecorder.addEventListener("dataavailable", (e) => {
+        this.chunks.push(e.data);
       });
+
+      // 1.1 Create Blob, feed to file reader, and attach to audio player
+      this.mediaRecorder.addEventListener("stop", () => {
+        const blob = new Blob(this.chunks, { type: this.contentType });
+
+        this.fileReader.readAsDataURL(blob);
+        this.chunks = [];
+        const audioUrl = window.URL.createObjectURL(blob);
+        this.player.src = audioUrl;
+      });
+    });
 
     // 2. Get encoded64 audio string
     this.fileReader.addEventListener("loadend", () => {
@@ -70,6 +71,19 @@ export default class InsertWordUI {
 
       this.mediaRecorder.stop();
     });
+
+    // 5. addEventListener
+    this.clearBtn.addEventListener("click", () => this.clear());
+  }
+
+  checkInputs() {
+    if (!this.item.value) {
+      return null;
+    }
+
+    if (!this.itemDescription.value && !this.exampleSentence.value && !this.player.src) {
+      return null;
+    }
   }
 
   createWord() {
@@ -77,11 +91,29 @@ export default class InsertWordUI {
     const description = this.itemDescription.value;
     const exampleSentence = this.exampleSentence.value;
     const sound = this.savedEncoding64;
-    const date = new Date();
+    const date = Util.getTodayDate();
 
     const item = new Item(name, description, date);
     item.setSound(sound);
     item.setHint(exampleSentence);
     return item;
+  }
+
+  showAlert(alertMessage, alertType) {
+    if (this.document.getElementsByClassName(`alert alert-dismissible alert-${alertType}`)[0]) {
+      return;
+    }
+
+    const alertDiv = document.createElement("DIV");
+    alertDiv.className = `alert alert-dismissible alert-${alertType}`;
+    alertDiv.innerHTML = `
+    <button class="close" data-dismiss="alert">&times;</button>
+    ${alertMessage}
+    `;
+    this.container.insertBefore(alertDiv, this.item);
+
+    setTimeout(() => {
+      alertDiv.remove();
+    }, 3000);
   }
 }
