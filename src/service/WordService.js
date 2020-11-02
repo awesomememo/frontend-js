@@ -1,11 +1,11 @@
 import EasyHttp from "../lib/EasyHttp";
 import Util from "../lib/Util";
 import Item from "../model/Item";
-import Progress from "../model/Progress";
+import { LOCALSTORAGE_KEY } from "../Constant";
 
 const wordUrl = "http://localhost:3000/words";
 const dateDifference = [1, 2, 3, 5, 8, 13];
-const divisionForTheNumberOfDays = 1000 * 60 * 60 * 24;
+const secondsInADay = 1000 * 60 * 60 * 24;
 
 export default class WordService {
   constructor() {
@@ -27,8 +27,12 @@ export default class WordService {
   }
 
   async getTodayWord() {
+    const currUserId = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
     const wordArray = await this.get();
     const newWordArray = wordArray.filter((wordObj) => {
+      if (wordObj.userId !== currUserId) {
+        return;
+      }
       const progresses = wordObj.progresses;
       if (progresses.length === 0) {
         return true;
@@ -42,7 +46,7 @@ export default class WordService {
       }
 
       const todayDate = Util.getTodayDate();
-      const dayDifference = Math.floor((todayDate - lastProgressDate) / divisionForTheNumberOfDays);
+      const dayDifference = Math.floor((todayDate - lastProgressDate) / secondsInADay);
 
       return dateDifference.includes(dayDifference);
     });

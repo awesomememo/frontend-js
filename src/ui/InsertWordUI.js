@@ -1,5 +1,6 @@
 import Item from "../model/Item";
 import Util from "../lib/Util";
+import {LOCALSTORAGE_KEY} from '../Constant';
 
 export default class InsertWordUI {
   constructor(document) {
@@ -78,22 +79,24 @@ export default class InsertWordUI {
 
   checkInputs() {
     if (!this.item.value) {
-      return null;
+      return false;
     }
 
     if (!this.itemDescription.value && !this.exampleSentence.value && !this.player.src) {
-      return null;
+      return false;
     }
+    return true;
   }
 
   createWord() {
+    const currUserId = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
     const name = this.item.value;
     const description = this.itemDescription.value;
     const exampleSentence = this.exampleSentence.value;
     const sound = this.savedEncoding64;
     const date = Util.getTodayDate();
 
-    const item = new Item(name, description, date);
+    const item = new Item(name, description, date, currUserId);
     item.setSound(sound);
     item.setHint(exampleSentence);
     return item;
@@ -104,7 +107,7 @@ export default class InsertWordUI {
       return;
     }
 
-    const alertDiv = document.createElement("DIV");
+    const alertDiv = document.createElement("div");
     alertDiv.className = `alert alert-dismissible alert-${alertType}`;
     alertDiv.innerHTML = `
     <button class="close" data-dismiss="alert">&times;</button>
@@ -114,6 +117,6 @@ export default class InsertWordUI {
 
     setTimeout(() => {
       alertDiv.remove();
-    }, 3000);
+    }, 8000);
   }
 }

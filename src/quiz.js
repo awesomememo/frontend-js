@@ -9,9 +9,14 @@ let correctWord;
 let wordCount = 0;
 
 async function* wordGenerator() {
-  const wordArray = await wordService.getTodayWord();
-  for (let word of wordArray) {
-    yield word;
+  while (true) {
+    const wordArray = await wordService.getTodayWord();
+    if (wordArray.length === 0) {
+      return;
+    }
+    for (let word of wordArray) {
+      yield word;
+    }
   }
 }
 
