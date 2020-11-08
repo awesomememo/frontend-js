@@ -1,11 +1,12 @@
 import Progress from "./Progress";
 
 export default class Item {
-  constructor(name, description, createTime) {
+  constructor(name, description, createTime, userId) {
     this.name = name;
     this.description = description;
     this.createTime = createTime;
     this.progresses = [];
+    this.userId = userId;
   }
 
   setId(id) {
