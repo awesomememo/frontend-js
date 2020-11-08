@@ -13,6 +13,7 @@ export default class InsertWordUI {
     this.stopBtn = document.getElementById("stop");
     this.addWordBtn = document.getElementById("add-word-btn");
     this.clearBtn = document.getElementById("clear");
+    this.doneBtn = document.getElementById('done');
     this.chunks = [];
     this.contentType = "audio/ogg; codecs=opus";
     this.fileReader = new FileReader();
