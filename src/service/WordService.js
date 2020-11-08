@@ -1,15 +1,11 @@
 import EasyHttp from "../lib/EasyHttp";
 import Util from "../lib/Util";
 import Item from "../model/Item";
-import Progress from "../model/Progress";
-
-const wordUrl = "http://localhost:3000/words";
-const dateDifference = [1, 2, 3, 5, 8, 13];
-const divisionForTheNumberOfDays = 1000 * 60 * 60 * 24;
+import { MEMORIZATION_DATES, SECONDS_IN_A_DAY } from "../Constant";
 
 export default class WordService {
   constructor() {
-    this.client = new EasyHttp(wordUrl);
+    this.client = new EasyHttp("http://localhost:3000/words");
   }
 
   saveWord(word) {
@@ -26,9 +22,12 @@ export default class WordService {
     this.client.update(id, newWord);
   }
 
-  async getTodayWord() {
+  async getTodayWordByUserId(currUserId) {
     const wordArray = await this.get();
     const newWordArray = wordArray.filter((wordObj) => {
+      if (wordObj.userId !== currUserId) {
+        return;
+      }
       const progresses = wordObj.progresses;
       if (progresses.length === 0) {
         return true;
@@ -42,9 +41,9 @@ export default class WordService {
       }
 
       const todayDate = Util.getTodayDate();
-      const dayDifference = Math.floor((todayDate - lastProgressDate) / divisionForTheNumberOfDays);
+      const dayDifference = Math.floor((todayDate - lastProgressDate) / SECONDS_IN_A_DAY);
 
-      return dateDifference.includes(dayDifference);
+      return MEMORIZATION_DATES.includes(dayDifference);
     });
 
     return newWordArray;

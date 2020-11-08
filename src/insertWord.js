@@ -1,7 +1,8 @@
-import InsertUI from "./ui/InsertWordUI";
+import InsertWordUI from "./ui/InsertWordUI";
 import WordService from "./service/WordService";
+import {LOCALSTORAGE_KEY} from './Constant';
 
-const insertUi = new InsertUI(document);
+const insertUi = new InsertWordUI(document);
 const wordService = new WordService();
 
 insertUi.addWordBtn.addEventListener("click", () => {
@@ -11,7 +12,7 @@ insertUi.addWordBtn.addEventListener("click", () => {
     return;
   }
 
-  const word = insertUi.createWord();
+  const word = insertUi.createWordForUser(JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY)));
   wordService.saveWord(word);
 
   insertUi.clear();
