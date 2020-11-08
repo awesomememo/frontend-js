@@ -1,6 +1,5 @@
 import Item from "../model/Item";
 import Util from "../lib/Util";
-import {LOCALSTORAGE_KEY} from '../Constant';
 
 export default class InsertWordUI {
   constructor(document) {
@@ -88,8 +87,7 @@ export default class InsertWordUI {
     return true;
   }
 
-  createWord() {
-    const currUserId = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
+  createWordForUser(currUserId) {
     const name = this.item.value;
     const description = this.itemDescription.value;
     const exampleSentence = this.exampleSentence.value;

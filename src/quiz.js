@@ -2,6 +2,7 @@ import QuizUI from "./ui/QuizUI";
 import WordService from "./service/WordService";
 import Util from "./lib/Util";
 import Progress from "./model/Progress";
+import {LOCALSTORAGE_KEY} from './Constant';
 
 const quizUi = new QuizUI(document);
 const wordService = new WordService();
@@ -10,7 +11,7 @@ let wordCount = 0;
 
 async function* wordGenerator() {
   while (true) {
-    const wordArray = await wordService.getTodayWord();
+    const wordArray = await wordService.getTodayWordByUserId(JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY)));
     if (wordArray.length === 0) {
       return;
     }
