@@ -13,6 +13,7 @@ export default class InsertWordUI {
     this.stopBtn = document.getElementById("stop");
     this.addWordBtn = document.getElementById("add-word-btn");
     this.clearBtn = document.getElementById("clear");
+    this.doneBtn = document.getElementById('done');
     this.chunks = [];
     this.contentType = "audio/ogg; codecs=opus";
     this.fileReader = new FileReader();
@@ -82,6 +83,13 @@ export default class InsertWordUI {
     }
 
     if (!this.itemDescription.value && !this.exampleSentence.value && !this.player.src) {
+      return false;
+    }
+    return true;
+  }
+
+  checkIfInputFilled() {
+    if (!this.item.value && !this.itemDescription.value && !this.exampleSentence.value && !this.player.src) {
       return false;
     }
     return true;

@@ -8,9 +8,9 @@ export default class WordService {
     this.client = new EasyHttp("http://localhost:3000/words");
   }
 
-  saveWord(word) {
-    this.client.add(word);
-    return word;
+  async saveWord(word) {
+    const wordObj = await this.client.add(word)
+    return Item.parseJSON(wordObj);
   }
 
   async get() {
