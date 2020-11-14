@@ -88,6 +88,13 @@ export default class InsertWordUI {
     return true;
   }
 
+  checkIfInputFilled() {
+    if (!this.item.value && !this.itemDescription.value && !this.exampleSentence.value && !this.player.src) {
+      return false;
+    }
+    return true;
+  }
+
   createWordForUser(currUserId) {
     const name = this.item.value;
     const description = this.itemDescription.value;
