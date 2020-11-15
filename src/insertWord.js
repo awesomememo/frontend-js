@@ -19,7 +19,7 @@ insertUi.doneBtn.addEventListener('click', async (e) => {
 async function addWord() {
   const inputPass = insertUi.checkInputs();
   if (!inputPass) {
-    insertUi.showAlert("Please fill the word input and make a recording or fill in the definition or example sentence input", "danger");
+    insertUi.showAlert("Please fill the word input and at least one of the following values", "danger");
     return false;
   }
 

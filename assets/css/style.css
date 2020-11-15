@@ -21,7 +21,8 @@ main {
 #word-main,
 #login-main,
 #register-main,
-#settings-main {
+#settings-main,
+#insert-word-main {
   margin-top: 5rem;
 }
 
@@ -55,7 +56,10 @@ main::after {
 #password-alert,
 #logout,
 #settings,
-#settings-password-alert {
+#settings-password-alert,
+#validation,
+#finish,
+#no-word-left {
   display: none;
 }
 
@@ -82,12 +86,6 @@ main::after {
 
 .quiz-text {
   font-size: x-large;
-}
-
-#validation,
-#finish,
-#no-word-left {
-  display: none;
 }
 
 #login-not-filled-alert,
