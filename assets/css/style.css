@@ -10,7 +10,7 @@ body {
 
 main {
   background: rgba(0, 0, 0, 0.2);
-  min-height: 100vh;
+  height: 100vh;
   position: relative;
   overflow: hidden;
 }
@@ -24,6 +24,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 4rem;
 }
 
 main::after {
@@ -35,10 +36,6 @@ main::after {
   height: 100%;
   width: 100%;
   z-index: -1;
-}
-
-#welcome {
-  height: 100%;
 }
 
 .line {
