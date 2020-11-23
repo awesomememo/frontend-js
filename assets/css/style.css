@@ -1,6 +1,7 @@
 body {
   font-family: "Roboto", sans-serif;
   min-height: 100vh;
+  overflow-y: hidden;
 }
 
 #word {
@@ -14,16 +15,15 @@ main {
   overflow: hidden;
 }
 
-#quiz-main {
-  overflow: auto;
-}
-
 #word-main,
 #login-main,
 #register-main,
 #settings-main,
-#insert-word-main {
-  margin-top: 5rem;
+#insert-word-main,
+#quiz-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 main::after {
@@ -59,7 +59,8 @@ main::after {
 #settings-password-alert,
 #validation,
 #finish,
-#no-word-left {
+#no-word-left,
+#word-template {
   display: none;
 }
 
@@ -78,10 +79,6 @@ main::after {
 #audio:hover {
   cursor: pointer;
   opacity: 0.5;
-}
-
-#word-template {
-  display: none;
 }
 
 .quiz-text {
