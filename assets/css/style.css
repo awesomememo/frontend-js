@@ -1,6 +1,7 @@
 body {
   font-family: "Roboto", sans-serif;
   min-height: 100vh;
+  overflow-y: hidden;
 }
 
 #word {
@@ -9,20 +10,21 @@ body {
 
 main {
   background: rgba(0, 0, 0, 0.2);
-  min-height: 100vh;
+  height: 100vh;
   position: relative;
   overflow: hidden;
-}
-
-#quiz-main {
-  overflow: auto;
 }
 
 #word-main,
 #login-main,
 #register-main,
-#settings-main {
-  margin-top: 5rem;
+#settings-main,
+#insert-word-main,
+#quiz-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 4rem;
 }
 
 main::after {
@@ -34,10 +36,6 @@ main::after {
   height: 100%;
   width: 100%;
   z-index: -1;
-}
-
-#welcome {
-  height: 100%;
 }
 
 .line {
@@ -55,7 +53,11 @@ main::after {
 #password-alert,
 #logout,
 #settings,
-#settings-password-alert {
+#settings-password-alert,
+#validation,
+#finish,
+#no-word-left,
+#word-template {
   display: none;
 }
 
@@ -76,18 +78,8 @@ main::after {
   opacity: 0.5;
 }
 
-#word-template {
-  display: none;
-}
-
 .quiz-text {
   font-size: x-large;
-}
-
-#validation,
-#finish,
-#no-word-left {
-  display: none;
 }
 
 #login-not-filled-alert,

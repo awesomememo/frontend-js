@@ -114,11 +114,12 @@ export default class InsertWordUI {
     }
 
     const alertDiv = document.createElement("div");
-    alertDiv.className = `alert alert-dismissible alert-${alertType}`;
+    alertDiv.className = `alert alert-dismissible alert-${alertType} text-center`;
     alertDiv.innerHTML = `
     <button class="close" data-dismiss="alert">&times;</button>
     ${alertMessage}
     `;
+
     this.container.insertBefore(alertDiv, this.item);
 
     setTimeout(() => {
