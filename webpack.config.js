@@ -8,6 +8,7 @@ module.exports = {
     login: ["@babel/polyfill", "./src/login.js"],
     register: ["@babel/polyfill", "./src/register.js"],
     settings: ["@babel/polyfill", "./src/settings.js"],
+    streak: ["@babel/polyfill", "./src/streak.js"],
   },
   output: {
     path: path.resolve(__dirname, "build"),

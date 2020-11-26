@@ -1,17 +1,17 @@
 import InsertWordUI from "./ui/InsertWordUI";
 import WordService from "./service/WordService";
-import {LOCALSTORAGE_KEY} from './Constant';
+import { CURR_USER_KEY } from "./Constant";
 
 const insertUi = new InsertWordUI(document);
 const wordService = new WordService();
 
 insertUi.addWordBtn.addEventListener("click", addWord);
 
-insertUi.doneBtn.addEventListener('click', async (e) => {
+insertUi.doneBtn.addEventListener("click", async (e) => {
   if (!insertUi.checkIfInputFilled()) {
     return;
   }
-  if (!await addWord()) {
+  if (!(await addWord())) {
     e.preventDefault();
   }
 });
@@ -23,7 +23,7 @@ async function addWord() {
     return false;
   }
 
-  const word = insertUi.createWordForUser(JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY)));
+  const word = insertUi.createWordForUser(JSON.parse(localStorage.getItem(CURR_USER_KEY)));
   await wordService.saveWord(word);
   insertUi.clear();
 

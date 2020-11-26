@@ -1,4 +1,4 @@
-import { LOCALSTORAGE_KEY } from "./Constant";
+import { CURR_USER_KEY } from "./Constant";
 import UserService from "./service/UserService";
 import LoginUI from "./ui/LoginUI";
 
@@ -10,7 +10,7 @@ ui.loginBtn.addEventListener("click", async (e) => {
   if (loginSuccess) {
     const user = await userService.getUserByEmail(ui.email.value);
     ui.clearInputs();
-    localStorage.setItem(LOCALSTORAGE_KEY, user.id);
+    localStorage.setItem(CURR_USER_KEY, user.id);
     loginSuccess = null;
   } else if (loginSuccess === null) {
     e.preventDefault();
@@ -28,10 +28,7 @@ ui.loginBtn.addEventListener("click", async (e) => {
       return;
     }
 
-    const isPasswordValid = UserService.validatePassword(
-      ui.password.value,
-      user.password
-    );
+    const isPasswordValid = UserService.validatePassword(ui.password.value, user.password);
 
     if (!isPasswordValid) {
       loginSuccess = false;

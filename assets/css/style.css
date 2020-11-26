@@ -20,11 +20,16 @@ main {
 #register-main,
 #settings-main,
 #insert-word-main,
-#quiz-main {
+#quiz-main,
+#streak-main {
   display: flex;
   justify-content: center;
   align-items: center;
   padding-top: 4rem;
+}
+
+#streak-main {
+  flex-direction: column;
 }
 
 main::after {
@@ -89,4 +94,19 @@ main::after {
 #password-alert,
 #settings-password-alert {
   background-color: rgba(236, 132, 132, 0.728);
+}
+
+#good-work {
+  background-color: rgba(255, 172, 108, 0.207);
+  border-radius: 13px;
+}
+
+#number-of-day-streak {
+  font-size: xx-large;
+  margin: 0;
+}
+
+#total-words,
+#longest-streak {
+  font-size: x-large;
 }

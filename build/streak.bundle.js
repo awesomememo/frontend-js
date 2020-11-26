@@ -88,7 +88,7 @@
   /******/ /******/ __webpack_require__.p = ""; // Load entry module and return exports
   /******/
   /******/
-  /******/ /******/ return __webpack_require__((__webpack_require__.s = 3));
+  /******/ /******/ return __webpack_require__((__webpack_require__.s = 6));
   /******/
 })(
   /************************************************************************/
@@ -4210,15 +4210,43 @@
         /***/
       },
 
-    /***/ "./src/login.js":
-      /*!**********************!*\
-  !*** ./src/login.js ***!
-  \**********************/
-      /*! no exports provided */
+    /***/ "./src/lib/Util.js":
+      /*!*************************!*\
+  !*** ./src/lib/Util.js ***!
+  \*************************/
+      /*! exports provided: default */
       /***/ function (module, __webpack_exports__, __webpack_require__) {
         "use strict";
         eval(
-          '__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Constant__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Constant */ "./src/Constant.js");\n/* harmony import */ var _service_UserService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./service/UserService */ "./src/service/UserService.js");\n/* harmony import */ var _ui_LoginUI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui/LoginUI */ "./src/ui/LoginUI.js");\nfunction asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }\n\nfunction _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }\n\n\n\n\nvar ui = new _ui_LoginUI__WEBPACK_IMPORTED_MODULE_2__["default"](document);\nvar userService = new _service_UserService__WEBPACK_IMPORTED_MODULE_1__["default"]();\nvar loginSuccess = null;\nui.loginBtn.addEventListener("click", /*#__PURE__*/function () {\n  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {\n    var user, _user, isPasswordValid;\n\n    return regeneratorRuntime.wrap(function _callee$(_context) {\n      while (1) {\n        switch (_context.prev = _context.next) {\n          case 0:\n            if (!loginSuccess) {\n              _context.next = 9;\n              break;\n            }\n\n            _context.next = 3;\n            return userService.getUserByEmail(ui.email.value);\n\n          case 3:\n            user = _context.sent;\n            ui.clearInputs();\n            localStorage.setItem(_Constant__WEBPACK_IMPORTED_MODULE_0__["CURR_USER_KEY"], user.id);\n            loginSuccess = null;\n            _context.next = 35;\n            break;\n\n          case 9:\n            if (!(loginSuccess === null)) {\n              _context.next = 33;\n              break;\n            }\n\n            e.preventDefault();\n\n            if (ui.checkIfInputFilled()) {\n              _context.next = 15;\n              break;\n            }\n\n            loginSuccess = false;\n            ui.loginBtn.click();\n            return _context.abrupt("return");\n\n          case 15:\n            _context.next = 17;\n            return userService.getUserByEmail(ui.email.value);\n\n          case 17:\n            _user = _context.sent;\n\n            if (_user) {\n              _context.next = 23;\n              break;\n            }\n\n            loginSuccess = false;\n            ui.failure("User does not exist");\n            ui.loginBtn.click();\n            return _context.abrupt("return");\n\n          case 23:\n            isPasswordValid = _service_UserService__WEBPACK_IMPORTED_MODULE_1__["default"].validatePassword(ui.password.value, _user.password);\n\n            if (isPasswordValid) {\n              _context.next = 29;\n              break;\n            }\n\n            loginSuccess = false;\n            ui.failure("Password is wrong");\n            ui.loginBtn.click();\n            return _context.abrupt("return");\n\n          case 29:\n            loginSuccess = true;\n            ui.loginBtn.click();\n            _context.next = 35;\n            break;\n\n          case 33:\n            e.preventDefault();\n            loginSuccess = null;\n\n          case 35:\n          case "end":\n            return _context.stop();\n        }\n      }\n    }, _callee);\n  }));\n\n  return function (_x) {\n    return _ref.apply(this, arguments);\n  };\n}());\n\n//# sourceURL=webpack:///./src/login.js?'
+          '__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Util; });\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nvar Util = /*#__PURE__*/function () {\n  function Util() {\n    _classCallCheck(this, Util);\n  }\n\n  _createClass(Util, null, [{\n    key: "b64toBlob",\n    value: function b64toBlob(b64Data) {\n      var contentType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";\n      var sliceSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 512;\n      var byteCharacters = atob(b64Data);\n      var byteArrays = [];\n\n      for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {\n        var slice = byteCharacters.slice(offset, offset + sliceSize);\n        var byteNumbers = new Array(slice.length);\n\n        for (var i = 0; i < slice.length; i++) {\n          byteNumbers[i] = slice.charCodeAt(i);\n        }\n\n        var byteArray = new Uint8Array(byteNumbers);\n        byteArrays.push(byteArray);\n      }\n\n      var blob = new Blob(byteArrays, {\n        type: contentType\n      });\n      return blob;\n    }\n  }, {\n    key: "getTodayDate",\n    value: function getTodayDate() {\n      var date = new Date();\n      return new Date(date.getFullYear(), date.getMonth(), date.getDate());\n    }\n  }, {\n    key: "toggleElement",\n    value: function toggleElement(element) {\n      if (element.style.display === "block") {\n        element.style.display = "none";\n        return;\n      }\n\n      element.style.display = "block";\n    }\n  }]);\n\n  return Util;\n}();\n\n\n\n//# sourceURL=webpack:///./src/lib/Util.js?'
+        );
+
+        /***/
+      },
+
+    /***/ "./src/model/Item.js":
+      /*!***************************!*\
+  !*** ./src/model/Item.js ***!
+  \***************************/
+      /*! exports provided: default */
+      /***/ function (module, __webpack_exports__, __webpack_require__) {
+        "use strict";
+        eval(
+          '__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Item; });\n/* harmony import */ var _Progress__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Progress */ "./src/model/Progress.js");\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\n\nvar Item = /*#__PURE__*/function () {\n  function Item(name, description, createTime, userId) {\n    _classCallCheck(this, Item);\n\n    this.name = name;\n    this.description = description;\n    this.createTime = createTime;\n    this.progresses = [];\n    this.userId = userId;\n  }\n\n  _createClass(Item, [{\n    key: "setId",\n    value: function setId(id) {\n      this.id = id;\n    }\n  }, {\n    key: "setSound",\n    value: function setSound(sound) {\n      this.sound = sound;\n    }\n  }, {\n    key: "setImage",\n    value: function setImage(image) {\n      this.image = image;\n    }\n  }, {\n    key: "setHint",\n    value: function setHint(hint) {\n      this.hint = hint;\n    }\n  }, {\n    key: "addProgress",\n    value: function addProgress(progress) {\n      this.progresses.push(progress);\n    }\n  }], [{\n    key: "parseJSON",\n    value: function parseJSON(plainObj) {\n      var item = Object.assign(new Item(), plainObj);\n      var progresses = item.progresses.map(_Progress__WEBPACK_IMPORTED_MODULE_0__["default"].parseJSON);\n      item.progresses = progresses;\n      return item;\n    }\n  }]);\n\n  return Item;\n}();\n\n\n\n//# sourceURL=webpack:///./src/model/Item.js?'
+        );
+
+        /***/
+      },
+
+    /***/ "./src/model/Progress.js":
+      /*!*******************************!*\
+  !*** ./src/model/Progress.js ***!
+  \*******************************/
+      /*! exports provided: default */
+      /***/ function (module, __webpack_exports__, __webpack_require__) {
+        "use strict";
+        eval(
+          '__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Progress; });\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nvar Progress = /*#__PURE__*/function () {\n  function Progress(time, isPass) {\n    _classCallCheck(this, Progress);\n\n    this.time = time;\n    this.isPass = isPass;\n  }\n\n  _createClass(Progress, null, [{\n    key: "parseJSON",\n    value: function parseJSON(plainObj) {\n      return Object.assign(new Progress(), plainObj);\n    }\n  }]);\n\n  return Progress;\n}();\n\n\n\n//# sourceURL=webpack:///./src/model/Progress.js?'
         );
 
         /***/
@@ -4252,28 +4280,56 @@
         /***/
       },
 
-    /***/ "./src/ui/LoginUI.js":
-      /*!***************************!*\
-  !*** ./src/ui/LoginUI.js ***!
-  \***************************/
+    /***/ "./src/service/WordService.js":
+      /*!************************************!*\
+  !*** ./src/service/WordService.js ***!
+  \************************************/
       /*! exports provided: default */
       /***/ function (module, __webpack_exports__, __webpack_require__) {
         "use strict";
         eval(
-          "__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return LoginUI; });\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nvar LoginUI = /*#__PURE__*/function () {\n  function LoginUI(document) {\n    _classCallCheck(this, LoginUI);\n\n    this.document = document;\n    this.notFilledAlert = this.document.getElementById('login-not-filled-alert');\n    this.failureAlert = this.document.getElementById('login-failure');\n    this.failureMessage = this.document.getElementById('login-failure-message');\n    this.email = this.document.getElementById('email');\n    this.password = this.document.getElementById('password');\n    this.loginBtn = this.document.getElementById('login-btn');\n  }\n\n  _createClass(LoginUI, [{\n    key: \"checkIfInputFilled\",\n    value: function checkIfInputFilled() {\n      var _this = this;\n\n      if (this.email.value === '' || this.password.value === '') {\n        this.notFilledAlert.style.display = 'block';\n        setTimeout(function () {\n          return _this.notFilledAlert.style.display = 'none';\n        }, 2000);\n        return false;\n      }\n\n      return true;\n    }\n  }, {\n    key: \"failure\",\n    value: function failure(message) {\n      var _this2 = this;\n\n      this.failureAlert.style.display = 'block';\n      this.failureMessage.textContent = message;\n      setTimeout(function () {\n        return _this2.failureAlert.style.display = 'none';\n      }, 3000);\n    }\n  }, {\n    key: \"clearInputs\",\n    value: function clearInputs() {\n      this.email.value = '';\n      this.password.value = '';\n    }\n  }]);\n\n  return LoginUI;\n}();\n\n\n\n//# sourceURL=webpack:///./src/ui/LoginUI.js?"
+          '__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return WordService; });\n/* harmony import */ var _lib_EasyHttp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/EasyHttp */ "./src/lib/EasyHttp.js");\n/* harmony import */ var _lib_Util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/Util */ "./src/lib/Util.js");\n/* harmony import */ var _model_Item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/Item */ "./src/model/Item.js");\n/* harmony import */ var _Constant__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Constant */ "./src/Constant.js");\nfunction asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }\n\nfunction _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\n\n\n\n\nvar WordService = /*#__PURE__*/function () {\n  function WordService() {\n    _classCallCheck(this, WordService);\n\n    this.client = new _lib_EasyHttp__WEBPACK_IMPORTED_MODULE_0__["default"]("http://localhost:3000/words");\n  }\n\n  _createClass(WordService, [{\n    key: "saveWord",\n    value: function saveWord(word) {\n      this.client.add(word);\n      return word;\n    }\n  }, {\n    key: "get",\n    value: function () {\n      var _get = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {\n        var plainObjs;\n        return regeneratorRuntime.wrap(function _callee$(_context) {\n          while (1) {\n            switch (_context.prev = _context.next) {\n              case 0:\n                _context.next = 2;\n                return this.client.getAll();\n\n              case 2:\n                plainObjs = _context.sent;\n                return _context.abrupt("return", plainObjs.map(_model_Item__WEBPACK_IMPORTED_MODULE_2__["default"].parseJSON));\n\n              case 4:\n              case "end":\n                return _context.stop();\n            }\n          }\n        }, _callee, this);\n      }));\n\n      function get() {\n        return _get.apply(this, arguments);\n      }\n\n      return get;\n    }()\n  }, {\n    key: "updateWord",\n    value: function updateWord(id, newWord) {\n      this.client.update(id, newWord);\n    }\n  }, {\n    key: "getTodayWordByUserId",\n    value: function () {\n      var _getTodayWordByUserId = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(currUserId) {\n        var wordArray, newWordArray;\n        return regeneratorRuntime.wrap(function _callee2$(_context2) {\n          while (1) {\n            switch (_context2.prev = _context2.next) {\n              case 0:\n                _context2.next = 2;\n                return this.get();\n\n              case 2:\n                wordArray = _context2.sent;\n                newWordArray = wordArray.filter(function (wordObj) {\n                  if (wordObj.userId !== currUserId) {\n                    return;\n                  }\n\n                  var progresses = wordObj.progresses;\n\n                  if (progresses.length === 0) {\n                    return true;\n                  }\n\n                  var lastProgressDate = new Date(progresses[progresses.length - 1].time);\n                  var lastProgress = progresses[progresses.length - 1];\n\n                  if (lastProgress.isPass === false) {\n                    return true;\n                  }\n\n                  var todayDate = _lib_Util__WEBPACK_IMPORTED_MODULE_1__["default"].getTodayDate();\n                  var dayDifference = Math.floor((todayDate - lastProgressDate) / _Constant__WEBPACK_IMPORTED_MODULE_3__["SECONDS_IN_A_DAY"]);\n                  return _Constant__WEBPACK_IMPORTED_MODULE_3__["MEMORIZATION_DATES"].includes(dayDifference);\n                });\n                return _context2.abrupt("return", newWordArray);\n\n              case 5:\n              case "end":\n                return _context2.stop();\n            }\n          }\n        }, _callee2, this);\n      }));\n\n      function getTodayWordByUserId(_x) {\n        return _getTodayWordByUserId.apply(this, arguments);\n      }\n\n      return getTodayWordByUserId;\n    }()\n  }]);\n\n  return WordService;\n}();\n\n\n\n//# sourceURL=webpack:///./src/service/WordService.js?'
         );
 
         /***/
       },
 
-    /***/ 3:
-      /*!********************************************!*\
-  !*** multi @babel/polyfill ./src/login.js ***!
-  \********************************************/
+    /***/ "./src/streak.js":
+      /*!***********************!*\
+  !*** ./src/streak.js ***!
+  \***********************/
+      /*! no exports provided */
+      /***/ function (module, __webpack_exports__, __webpack_require__) {
+        "use strict";
+        eval(
+          '__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _service_WordService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./service/WordService */ "./src/service/WordService.js");\n/* harmony import */ var _ui_StreakUI__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ui/StreakUI */ "./src/ui/StreakUI.js");\n/* harmony import */ var _Constant__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Constant */ "./src/Constant.js");\n/* harmony import */ var _service_UserService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./service/UserService */ "./src/service/UserService.js");\n\n\n\n\nvar wordService = new _service_WordService__WEBPACK_IMPORTED_MODULE_0__["default"]();\nvar streakUI = new _ui_StreakUI__WEBPACK_IMPORTED_MODULE_1__["default"](document);\nvar userService = new _service_UserService__WEBPACK_IMPORTED_MODULE_3__["default"]();\nvar userId = localStorage.getItem(_Constant__WEBPACK_IMPORTED_MODULE_2__["CURR_USER_KEY"]);\nwordService.get().then(function (items) {\n  var userItems = items.filter(function (item) {\n    return item.userId === parseInt(userId);\n  });\n  var totalWords = userItems.length;\n  userService.getUserById(userId).then(function (userObj) {\n    var dayStreak = userObj.streak;\n    var longestStreak = userObj.longestStreak;\n    streakUI.paint(dayStreak, totalWords, longestStreak);\n  });\n});\n\n//# sourceURL=webpack:///./src/streak.js?'
+        );
+
+        /***/
+      },
+
+    /***/ "./src/ui/StreakUI.js":
+      /*!****************************!*\
+  !*** ./src/ui/StreakUI.js ***!
+  \****************************/
+      /*! exports provided: default */
+      /***/ function (module, __webpack_exports__, __webpack_require__) {
+        "use strict";
+        eval(
+          '__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return StreakUI; });\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nvar StreakUI = /*#__PURE__*/function () {\n  function StreakUI(document) {\n    _classCallCheck(this, StreakUI);\n\n    this.document = document;\n    this.dayStreakEle = document.getElementById("number-of-day-streak");\n    this.totalWordsEle = document.getElementById("total-words");\n    this.longestStreakEle = document.getElementById("longest-streak");\n  }\n\n  _createClass(StreakUI, [{\n    key: "paint",\n    value: function paint(dayStreak, totalWords, longestStreak) {\n      this.dayStreakEle.textContent = dayStreak;\n      this.totalWordsEle.textContent = totalWords;\n      this.longestStreakEle.textContent = longestStreak;\n    }\n  }]);\n\n  return StreakUI;\n}();\n\n\n\n//# sourceURL=webpack:///./src/ui/StreakUI.js?'
+        );
+
+        /***/
+      },
+
+    /***/ 6:
+      /*!*********************************************!*\
+  !*** multi @babel/polyfill ./src/streak.js ***!
+  \*********************************************/
       /*! no static exports found */
       /***/ function (module, exports, __webpack_require__) {
         eval(
-          '__webpack_require__(/*! @babel/polyfill */"./node_modules/@babel/polyfill/lib/index.js");\nmodule.exports = __webpack_require__(/*! ./src/login.js */"./src/login.js");\n\n\n//# sourceURL=webpack:///multi_@babel/polyfill_./src/login.js?'
+          '__webpack_require__(/*! @babel/polyfill */"./node_modules/@babel/polyfill/lib/index.js");\nmodule.exports = __webpack_require__(/*! ./src/streak.js */"./src/streak.js");\n\n\n//# sourceURL=webpack:///multi_@babel/polyfill_./src/streak.js?'
         );
 
         /***/
