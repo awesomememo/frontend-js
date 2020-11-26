@@ -21,9 +21,14 @@ export default class User {
   updateStreak(date) {
     const numDaysApart = this.findDaysApart(date);
 
-    if (this.streakArray[this.streakArray.length - 1] !== date) {
+    if (this.streakArray.length === 0) {
       this.streakArray.push(date);
 
+      this.streak = 1;
+      this.longestStreak = 1;
+    }
+
+    if (this.streakArray[this.streakArray.length - 1] !== date) {
       if (numDaysApart > 1) {
         this.streak = 1;
       }

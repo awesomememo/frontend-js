@@ -6,7 +6,7 @@ const ui = new SettingsUI(document);
 const userService = new UserService();
 const currUserId = JSON.parse(localStorage.getItem(CURR_USER_KEY));
 let currUser;
-
+let navOpen = false;
 let settingsChecked = null;
 
 window.addEventListener("DOMContentLoaded", async () => {
@@ -40,5 +40,19 @@ ui.saveChangesBtn.addEventListener("click", async (e) => {
   } else {
     e.preventDefault();
     settingsChecked = null;
+  }
+});
+
+document.getElementById("hamburger").addEventListener("click", () => {
+  if (navOpen === false) {
+    navOpen = true;
+    document.getElementById("settings-main").addEventListener("click", () => {
+      document.getElementById("hamburger").click();
+    });
+  } else {
+    navOpen = false;
+    document.getElementById("settings-main").removeEventListener("click", () => {
+      click(document.getElementById("hamburger"));
+    });
   }
 });
