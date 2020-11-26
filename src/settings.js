@@ -1,15 +1,15 @@
-import { LOCALSTORAGE_KEY } from "./Constant";
+import { CURR_USER_KEY } from "./Constant";
 import SettingsUI from "../src/ui/SettingsUI";
 import UserService from "./service/UserService";
 
 const ui = new SettingsUI(document);
 const userService = new UserService();
-const currUserId = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
+const currUserId = JSON.parse(localStorage.getItem(CURR_USER_KEY));
 let currUser;
 
 let settingsChecked = null;
 
-window.addEventListener('DOMContentLoaded', async () => {
+window.addEventListener("DOMContentLoaded", async () => {
   currUser = await userService.getUserById(currUserId);
   ui.newUsername.value = currUser.username;
 });
@@ -38,7 +38,7 @@ ui.saveChangesBtn.addEventListener("click", async (e) => {
     settingsChecked = true;
     ui.saveChangesBtn.click();
   } else {
-      e.preventDefault();
-      settingsChecked = null;
+    e.preventDefault();
+    settingsChecked = null;
   }
 });
