@@ -1,3 +1,4 @@
+import Util from "./lib/Util";
 import WordService from "./service/WordService";
 import StreakUI from "./ui/StreakUI";
 import { CURR_USER_KEY } from "./Constant";
@@ -20,16 +21,4 @@ wordService.get().then((words) => {
   });
 });
 
-document.getElementById("hamburger").addEventListener("click", () => {
-  if (navOpen === false) {
-    navOpen = true;
-    document.getElementById("streak-main").addEventListener("click", () => {
-      document.getElementById("hamburger").click();
-    });
-  } else {
-    navOpen = false;
-    document.getElementById("streak-main").removeEventListener("click", () => {
-      click(document.getElementById("hamburger"));
-    });
-  }
-});
+Util.closeNavbarEventListeners(document.getElementById("hamburger"), document.getElementById("streak-main"));

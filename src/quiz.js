@@ -9,7 +9,6 @@ const quizUi = new QuizUI(document);
 const wordService = new WordService();
 const userId = localStorage.getItem(CURR_USER_KEY);
 const userService = new UserService();
-let navOpen = false;
 
 userService.getUserById(userId).then((user) => {
   let correctWord;
@@ -86,16 +85,4 @@ userService.getUserById(userId).then((user) => {
   });
 });
 
-document.getElementById("hamburger").addEventListener("click", () => {
-  if (navOpen === false) {
-    navOpen = true;
-    document.getElementById("quiz-main").addEventListener("click", () => {
-      document.getElementById("hamburger").click();
-    });
-  } else {
-    navOpen = false;
-    document.getElementById("quiz-main").removeEventListener("click", () => {
-      click(document.getElementById("hamburger"));
-    });
-  }
-});
+Util.closeNavbarEventListeners(document.getElementById("hamburger"), document.getElementById("quiz-main"));

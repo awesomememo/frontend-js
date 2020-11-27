@@ -1,3 +1,4 @@
+import Util from "./lib/Util";
 import { CURR_USER_KEY } from "./Constant";
 import RegisterUI from "./ui/RegisterUI";
 import UserService from "./service/UserService";
@@ -56,3 +57,5 @@ document.getElementById("hamburger").addEventListener("click", () => {
     });
   }
 });
+
+Util.closeNavbarEventListeners(document.getElementById("hamburger"), document.getElementById("register-main"));

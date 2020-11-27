@@ -32,4 +32,22 @@ export default class Util {
 
     element.style.display = "block";
   }
+
+  static closeNavbarEventListeners(hamburgerBtn, mainElement) {
+    let navOpen = false;
+
+    hamburgerBtn.addEventListener("click", () => {
+      if (navOpen === false) {
+        navOpen = true;
+        mainElement.addEventListener("click", () => {
+          hamburgerBtn.click();
+        });
+      } else {
+        navOpen = false;
+        mainElement.removeEventListener("click", () => {
+          click(hamburgerBtn);
+        });
+      }
+    });
+  }
 }

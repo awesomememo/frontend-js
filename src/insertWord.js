@@ -1,10 +1,10 @@
+import Util from "./lib/Util";
 import InsertWordUI from "./ui/InsertWordUI";
 import WordService from "./service/WordService";
 import { CURR_USER_KEY } from "./Constant";
 
 const insertUi = new InsertWordUI(document);
 const wordService = new WordService();
-let navOpen = false;
 
 insertUi.addWordBtn.addEventListener("click", addWord);
 
@@ -31,16 +31,4 @@ async function addWord() {
   return true;
 }
 
-document.getElementById("hamburger").addEventListener("click", () => {
-  if (navOpen === false) {
-    navOpen = true;
-    document.getElementById("insert-word-main").addEventListener("click", () => {
-      document.getElementById("hamburger").click();
-    });
-  } else {
-    navOpen = false;
-    document.getElementById("insert-word-main").removeEventListener("click", () => {
-      click(document.getElementById("hamburger"));
-    });
-  }
-});
+Util.closeNavbarEventListeners(document.getElementById("hamburger"), document.getElementById("insertWord-main"));
