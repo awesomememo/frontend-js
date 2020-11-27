@@ -8,7 +8,6 @@ const wordService = new WordService();
 const streakUI = new StreakUI(document);
 const userService = new UserService();
 const userId = parseInt(localStorage.getItem(CURR_USER_KEY));
-let navOpen = false;
 
 wordService.get().then((words) => {
   const userWords = words.filter((word) => word.userId === userId);

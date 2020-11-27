@@ -6,7 +6,6 @@ import UserService from "./service/UserService";
 const ui = new RegisterUI(document);
 const userService = new UserService();
 let registerSuccess = null;
-let navOpen = false;
 
 ui.registerBtn.addEventListener("click", async (e) => {
   if (registerSuccess) {
@@ -41,20 +40,6 @@ ui.registerBtn.addEventListener("click", async (e) => {
   } else {
     e.preventDefault();
     registerSuccess = null;
-  }
-});
-
-document.getElementById("hamburger").addEventListener("click", () => {
-  if (navOpen === false) {
-    navOpen = true;
-    document.getElementById("register-main").addEventListener("click", () => {
-      document.getElementById("hamburger").click();
-    });
-  } else {
-    navOpen = false;
-    document.getElementById("register-main").removeEventListener("click", () => {
-      click(document.getElementById("hamburger"));
-    });
   }
 });
 
