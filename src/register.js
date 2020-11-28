@@ -1,3 +1,4 @@
+import Util from "./lib/Util";
 import { CURR_USER_KEY } from "./Constant";
 import RegisterUI from "./ui/RegisterUI";
 import UserService from "./service/UserService";
@@ -41,3 +42,5 @@ ui.registerBtn.addEventListener("click", async (e) => {
     registerSuccess = null;
   }
 });
+
+Util.closeNavbarAtClickOutside();

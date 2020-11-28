@@ -1,3 +1,4 @@
+import Util from "./lib/Util";
 import InsertWordUI from "./ui/InsertWordUI";
 import WordService from "./service/WordService";
 import { CURR_USER_KEY } from "./Constant";
@@ -29,3 +30,5 @@ async function addWord() {
 
   return true;
 }
+
+Util.closeNavbarAtClickOutside();

@@ -1,3 +1,4 @@
+import Util from "./lib/Util";
 import { CURR_USER_KEY } from "./Constant";
 import UserService from "./service/UserService";
 import LoginUI from "./ui/LoginUI";
@@ -43,3 +44,5 @@ ui.loginBtn.addEventListener("click", async (e) => {
     loginSuccess = null;
   }
 });
+
+Util.closeNavbarAtClickOutside();

@@ -84,3 +84,5 @@ userService.getUserById(userId).then((user) => {
     }
   });
 });
+
+Util.closeNavbarAtClickOutside();

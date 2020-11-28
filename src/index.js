@@ -1,10 +1,10 @@
 import { CURR_USER_KEY } from "./Constant";
 import IndexUI from "./ui/IndexUI";
 import UserService from "./service/UserService";
+import Util from "./lib/Util";
 
 const userService = new UserService();
 const ui = new IndexUI(document);
-
 window.addEventListener("DOMContentLoaded", async () => {
   const currUserId = localStorage.getItem(CURR_USER_KEY);
   if (currUserId === null) {
@@ -25,3 +25,5 @@ userService.getUserById(localStorage.getItem(CURR_USER_KEY)).then((userObj) => {
 
   ui.paintStreak(numStreakInSevenDays);
 });
+
+Util.closeNavbarAtClickOutside();

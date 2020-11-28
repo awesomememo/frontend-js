@@ -32,4 +32,12 @@ export default class Util {
 
     element.style.display = "block";
   }
+
+  static closeNavbarAtClickOutside() {
+    addEventListener("click", (e) => {
+      if (e.target.id !== "hamburger" && document.getElementById("drop-down-menu").classList.contains("show")) {
+        document.getElementById("hamburger").click();
+      }
+    });
+  }
 }

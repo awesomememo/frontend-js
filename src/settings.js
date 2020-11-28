@@ -1,3 +1,4 @@
+import Util from "./lib/Util";
 import { CURR_USER_KEY } from "./Constant";
 import SettingsUI from "../src/ui/SettingsUI";
 import UserService from "./service/UserService";
@@ -6,7 +7,6 @@ const ui = new SettingsUI(document);
 const userService = new UserService();
 const currUserId = JSON.parse(localStorage.getItem(CURR_USER_KEY));
 let currUser;
-
 let settingsChecked = null;
 
 window.addEventListener("DOMContentLoaded", async () => {
@@ -42,3 +42,5 @@ ui.saveChangesBtn.addEventListener("click", async (e) => {
     settingsChecked = null;
   }
 });
+
+Util.closeNavbarAtClickOutside();

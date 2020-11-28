@@ -1,3 +1,4 @@
+import Util from "./lib/Util";
 import WordService from "./service/WordService";
 import StreakUI from "./ui/StreakUI";
 import { CURR_USER_KEY } from "./Constant";
@@ -18,3 +19,5 @@ wordService.get().then((words) => {
     streakUI.paint(currStreak, totalWords, longestStreak);
   });
 });
+
+Util.closeNavbarAtClickOutside();
