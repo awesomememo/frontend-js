@@ -34,11 +34,6 @@ export default class User {
     if (this.streakArray[this.streakArray.length - 1] !== date.toISOString()) {
       this.streakArray.push(date.toISOString());
 
-      this.streak = 1;
-      this.longestStreak = 1;
-    }
-
-    if (this.streakArray[this.streakArray.length - 1] !== date) {
       if (numDaysApart > 1) {
         this.streak = 1;
       }
