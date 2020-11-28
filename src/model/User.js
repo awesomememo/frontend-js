@@ -15,14 +15,24 @@ export default class User {
   }
 
   findDaysApart(date) {
+    if (this.streakArray.length === 0) {
+      return 0;
+    }
     return (date - new Date(this.streakArray[this.streakArray.length - 1])) / SECONDS_IN_A_DAY;
   }
 
   updateStreak(date) {
+    if (this.streakArray.length === 0) {
+      this.streakArray.push(date.toISOString());
+      this.streak = 1;
+      this.longestStreak = 1;
+      return;
+    }
+
     const numDaysApart = this.findDaysApart(date);
 
-    if (this.streakArray.length === 0) {
-      this.streakArray.push(date);
+    if (this.streakArray[this.streakArray.length - 1] !== date.toISOString()) {
+      this.streakArray.push(date.toISOString());
 
       this.streak = 1;
       this.longestStreak = 1;
