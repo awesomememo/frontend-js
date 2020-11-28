@@ -20,4 +20,4 @@ wordService.get().then((words) => {
   });
 });
 
-Util.closeNavbarEventListeners(document.getElementById("hamburger"), document.getElementById("streak-main"));
+Util.closeNavbarAtClickOutside();

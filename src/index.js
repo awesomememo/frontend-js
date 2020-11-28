@@ -26,4 +26,4 @@ userService.getUserById(localStorage.getItem(CURR_USER_KEY)).then((userObj) => {
   ui.paintStreak(numStreakInSevenDays);
 });
 
-Util.closeNavbarEventListeners(document.getElementById("hamburger"), document.getElementById("index-main"));
+Util.closeNavbarAtClickOutside();

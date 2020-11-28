@@ -85,4 +85,4 @@ userService.getUserById(userId).then((user) => {
   });
 });
 
-Util.closeNavbarEventListeners(document.getElementById("hamburger"), document.getElementById("quiz-main"));
+Util.closeNavbarAtClickOutside();

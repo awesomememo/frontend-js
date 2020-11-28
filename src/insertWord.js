@@ -31,4 +31,4 @@ async function addWord() {
   return true;
 }
 
-Util.closeNavbarEventListeners(document.getElementById("hamburger"), document.getElementById("insertWord-main"));
+Util.closeNavbarAtClickOutside();

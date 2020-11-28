@@ -43,4 +43,4 @@ ui.registerBtn.addEventListener("click", async (e) => {
   }
 });
 
-Util.closeNavbarEventListeners(document.getElementById("hamburger"), document.getElementById("register-main"));
+Util.closeNavbarAtClickOutside();

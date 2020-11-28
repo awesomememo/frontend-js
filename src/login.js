@@ -45,4 +45,4 @@ ui.loginBtn.addEventListener("click", async (e) => {
   }
 });
 
-Util.closeNavbarEventListeners(document.getElementById("hamburger"), document.getElementById("login-main"));
+Util.closeNavbarAtClickOutside();
