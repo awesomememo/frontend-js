@@ -107,6 +107,7 @@ main::after {
 }
 
 #total-words,
+#words-done,
 #longest-streak {
   font-size: x-large;
 }

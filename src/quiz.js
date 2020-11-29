@@ -7,8 +7,14 @@ import UserService from "./service/UserService";
 
 const quizUi = new QuizUI(document);
 const wordService = new WordService();
-const userId = localStorage.getItem(CURR_USER_KEY);
+const userId = JSON.parse(localStorage.getItem(CURR_USER_KEY));
 const userService = new UserService();
+let wordsLeftToDo;
+let totalWords;
+
+wordService.getTodayWordByUserId(userId).then((wordArray) => {
+  totalWords = wordArray.length;
+});
 
 userService.getUserById(userId).then((user) => {
   let correctWord;
@@ -16,7 +22,7 @@ userService.getUserById(userId).then((user) => {
 
   async function* wordGenerator() {
     while (true) {
-      const wordArray = await wordService.getTodayWordByUserId(JSON.parse(localStorage.getItem(CURR_USER_KEY)));
+      const wordArray = await wordService.getTodayWordByUserId(userId);
       if (wordArray.length === 0) {
         return;
       }
@@ -24,6 +30,28 @@ userService.getUserById(userId).then((user) => {
         yield word;
       }
     }
+  }
+
+  async function findWordLeftToDo() {
+    const wordArray = await wordService.getTodayWordByUserId(userId);
+    wordsLeftToDo = wordArray.filter((item) => {
+      if (item.progresses.length === 0) {
+        return true;
+      }
+
+      return item.progresses[item.progresses.length - 1].time !== Util.getTodayDate().toISOString();
+    }).length;
+
+    wordArray.forEach((item) => {
+      if (item.progresses.length === 0) {
+        return;
+      }
+
+      if (item.progresses[item.progresses.length - 1].time === Util.getTodayDate().toISOString() && item.progresses[item.progresses.length - 1].isPass === false) {
+        totalWords++;
+        wordsLeftToDo++;
+      }
+    });
   }
 
   const generator = wordGenerator();
@@ -49,13 +77,17 @@ userService.getUserById(userId).then((user) => {
     }
 
     wordCount++;
-    quizUi.showItem(word);
+
+    const wordsLeft = totalWords - wordsLeftToDo;
+    quizUi.showItem(word, wordsLeft, totalWords);
     correctWord = word;
   }
 
   quizUi.quizMain.addEventListener("click", (e) => {
     if (e.target === quizUi.startBtn || e.target === quizUi.nextBtn) {
-      showWord();
+      findWordLeftToDo().then(() => {
+        showWord();
+      });
       return;
     }
 

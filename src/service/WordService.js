@@ -9,7 +9,7 @@ export default class WordService {
   }
 
   async saveWord(word) {
-    const wordObj = await this.client.add(word)
+    const wordObj = await this.client.add(word);
     return Item.parseJSON(wordObj);
   }
 

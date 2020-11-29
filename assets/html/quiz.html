@@ -60,6 +60,9 @@
           <div class="card-body">
             <h1>What's the word?</h1>
             <div class="mb-3">
+              <p class="lead"><span id="words-done"></span> / <span id="total-words"></span></p>
+            </div>
+            <div class="mb-3">
               <i class="far fa-question-circle fa-2x text-warning" id="hint"></i>
               <div id="hint-text" class="text-warning quiz-text"></div>
             </div>
@@ -74,7 +77,8 @@
             <div class="form-group">
               <input type="text" class="form-control form-control-lg" id="word" placeholder="word" />
             </div>
-            <button class="btn btn-success btn-small" id="submit-btn">Submit</button>
+            <button class="btn btn-primary" id="submit-btn">Submit</button>
+            <a href="../../index.html" class="btn btn-danger btn-small">Abort Mission</a>
           </div>
         </div>
         <div class="card p-2 text-center w-100" id="validation">
