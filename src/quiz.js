@@ -9,7 +9,7 @@ const quizUi = new QuizUI(document);
 const wordService = new WordService();
 const userId = JSON.parse(localStorage.getItem(CURR_USER_KEY));
 const userService = new UserService();
-let wordsLeftToDo;
+let wordsLeft;
 let totalWords;
 
 wordService.getTodayWordByUserId(userId).then((wordArray) => {
@@ -32,9 +32,9 @@ userService.getUserById(userId).then((user) => {
     }
   }
 
-  async function findWordLeftToDo() {
+  async function findWordsLeft() {
     const wordArray = await wordService.getTodayWordByUserId(userId);
-    wordsLeftToDo = wordArray.filter((item) => {
+    wordsLeft = wordArray.filter((item) => {
       if (item.progresses.length === 0) {
         return true;
       }
@@ -49,7 +49,7 @@ userService.getUserById(userId).then((user) => {
 
       if (item.progresses[item.progresses.length - 1].time === Util.getTodayDate().toISOString() && item.progresses[item.progresses.length - 1].isPass === false) {
         totalWords++;
-        wordsLeftToDo++;
+        wordsLeft++;
       }
     });
   }
@@ -78,14 +78,14 @@ userService.getUserById(userId).then((user) => {
 
     wordCount++;
 
-    const wordsLeft = totalWords - wordsLeftToDo;
-    quizUi.showItem(word, wordsLeft, totalWords);
+    const finishedWords = totalWords - wordsLeft;
+    quizUi.showItem(word, finishedWords, totalWords);
     correctWord = word;
   }
 
   quizUi.quizMain.addEventListener("click", (e) => {
     if (e.target === quizUi.startBtn || e.target === quizUi.nextBtn) {
-      findWordLeftToDo().then(() => {
+      findWordsLeft().then(() => {
         showWord();
       });
       return;
