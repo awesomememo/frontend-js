@@ -29,7 +29,7 @@ export default class QuizUI {
     this.totalWords = document.getElementById("total-words");
   }
 
-  showItem(item, wordLeft, totalNumWord) {
+  showItem(item, wordsLeft, totalNumWords) {
     this.clearWordTemplate();
 
     if (item.hint) {
@@ -51,8 +51,8 @@ export default class QuizUI {
       this.audioElement.src = window.URL.createObjectURL(blob);
     }
 
-    this.finishedWords.textContent = wordLeft;
-    this.totalWords.textContent = totalNumWord;
+    this.finishedWords.textContent = wordsLeft;
+    this.totalWords.textContent = totalNumWords;
   }
 
   validate(item) {
