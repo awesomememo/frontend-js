@@ -3,16 +3,33 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../css/bootstrap.css" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+      crossorigin="anonymous"
+    />
 
     <link rel="stylesheet" href="../css/style.css" />
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <title>Quiz</title>
   </head>
@@ -20,7 +37,12 @@
     <nav class="navbar navbar-dark bg-primary fixed-top">
       <div class="container">
         <a href="#" class="navbar-brand">Quiz</a>
-        <button id="hamburger" class="navbar-toggler" data-target="#drop-down-menu" data-toggle="collapse">
+        <button
+          id="hamburger"
+          class="navbar-toggler"
+          data-target="#drop-down-menu"
+          data-toggle="collapse"
+        >
           <span>
             <i class="fas fa-bars"></i>
           </span>
@@ -60,21 +82,34 @@
           <div class="card-body">
             <h1>What's the word?</h1>
             <div class="mb-3">
-              <i class="far fa-question-circle fa-2x text-warning" id="hint"></i>
+              <i
+                class="far fa-question-circle fa-2x text-warning"
+                id="hint"
+              ></i>
               <div id="hint-text" class="text-warning quiz-text"></div>
             </div>
             <div class="mb-3">
               <i class="fas fa-atlas fa-2x text-secondary" id="definition"></i>
-              <span id="definition-text" class="quiz-text text-secondary"></span>
+              <span
+                id="definition-text"
+                class="quiz-text text-secondary"
+              ></span>
             </div>
             <div>
               <i class="fas fa-volume-up fa-2x text-primary" id="audio"></i>
               <audio id="audio-element" class="d-none" controls></audio>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control form-control-lg" id="word" placeholder="word" />
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                id="word"
+                placeholder="word"
+              />
             </div>
-            <button class="btn btn-success btn-small" id="submit-btn">Submit</button>
+            <button class="btn btn-success btn-small" id="submit-btn">
+              Submit
+            </button>
           </div>
         </div>
         <div class="card p-2 text-center w-100" id="validation">
@@ -84,7 +119,9 @@
             <p class="lead" id="validation-word"></p>
             <p id="validation-definition"></p>
           </div>
-          <button class="btn btn-primary btn-block mt-3" id="next-btn">Next</button>
+          <button class="btn btn-primary btn-block mt-3" id="next-btn">
+            Next
+          </button>
         </div>
         <div class="p-2 text-white text-center" id="finish">
           <h1>Congratulations!</h1>
@@ -94,7 +131,10 @@
         <div id="no-word-left" class="p-2 text-white text-center">
           <h1>You have no words left for today!</h1>
           <i class="fas fa-trophy fa-5x text-warning"></i>
-          <h3>Let's make some more words, click the Add Word button below to add some more words!</h3>
+          <h3>
+            Let's make some more words, click the Add Word button below to add
+            some more words!
+          </h3>
           <a href="wordInsert.html" class="btn btn-primary">Add Word</a>
           <a href="../../index.html" class="btn btn-warning">Leave</a>
         </div>
@@ -102,9 +142,21 @@
     </main>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
     <script src="../../build/quiz.bundle.js"></script>
   </body>
 </html>

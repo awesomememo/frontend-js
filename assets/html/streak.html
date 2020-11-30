@@ -3,16 +3,33 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../css/bootstrap.css" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+      crossorigin="anonymous"
+    />
 
     <link rel="stylesheet" href="../css/style.css" />
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <title>Streak</title>
   </head>
@@ -20,7 +37,12 @@
     <nav class="navbar navbar-dark bg-primary fixed-top">
       <div class="container">
         <a href="#" class="navbar-brand">Streak</a>
-        <button id="hamburger" class="navbar-toggler" data-target="#drop-down-menu" data-toggle="collapse">
+        <button
+          id="hamburger"
+          class="navbar-toggler"
+          data-target="#drop-down-menu"
+          data-toggle="collapse"
+        >
           <span>
             <i class="fas fa-bars"></i>
           </span>
@@ -35,16 +57,22 @@
               <a href="../../index.html" class="nav-link" id="logout">Logout</a>
             </li>
             <li class="nav-item">
-              <a href="./settings.html" class="nav-link" id="settings">Settings</a>
+              <a href="./settings.html" class="nav-link" id="settings"
+                >Settings</a
+              >
             </li>
             <li class="nav-item">
-              <a href="./wordInsert.html" class="nav-link" id="add-word">Word</a>
+              <a href="./wordInsert.html" class="nav-link" id="add-word"
+                >Word</a
+              >
             </li>
             <li class="nav-item">
               <a href="./quiz.html" class="nav-link" id="quiz">Quiz</a>
             </li>
             <li class="nav-item">
-              <a href="./streak.html" class="active nav-link" id="streak">Streak</a>
+              <a href="./streak.html" class="active nav-link" id="streak"
+                >Streak</a
+              >
             </li>
           </ul>
         </div>
@@ -57,7 +85,10 @@
           <h1>Streak</h1>
           <p class="p-2 text-warning" id="good-work">Keep up the good work!</p>
           <div id="current-streak">
-            <p class="font-weight-bold text-warning" id="number-of-day-streak"></p>
+            <p
+              class="font-weight-bold text-warning"
+              id="number-of-day-streak"
+            ></p>
             <p class="lead">CURRENT STREAK</p>
           </div>
           <div class="extra-streak-information d-flex justify-content-around">
@@ -69,7 +100,10 @@
             <div>
               <i class="fas fa-fire fa-2x text-danger"></i>
               <p class="m-0 text-info">LONGEST STREAK</p>
-              <p class="m-0 font-weight-bold text-warning" id="longest-streak"></p>
+              <p
+                class="m-0 font-weight-bold text-warning"
+                id="longest-streak"
+              ></p>
             </div>
           </div>
           <a href="../../index.html" class="btn-info btn btn-block">Home</a>
@@ -79,9 +113,21 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
     <script src="../../build/streak.bundle.js"></script>
   </body>
 </html>
