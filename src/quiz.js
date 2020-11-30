@@ -16,7 +16,9 @@ userService.getUserById(userId).then((user) => {
 
   async function* wordGenerator() {
     while (true) {
-      const wordArray = await wordService.getTodayWordByUserId(JSON.parse(localStorage.getItem(CURR_USER_KEY)));
+      const wordArray = await wordService.getTodayWordByUserId(
+        JSON.parse(localStorage.getItem(CURR_USER_KEY))
+      );
       if (wordArray.length === 0) {
         return;
       }
@@ -49,6 +51,8 @@ userService.getUserById(userId).then((user) => {
     }
 
     wordCount++;
+    const sound = await wordService.getSoundByWordId(word.id);
+    word.sound = sound;
     quizUi.showItem(word);
     correctWord = word;
   }

@@ -55,4 +55,10 @@ export default class WordService {
 
     return todayWordArray;
   }
+
+  async getSoundByWordId(id) {
+    const response = await fetch(`${BASE_URL}/items/${id}/sound`)
+    const resText = await response.text()
+    return resText
+  }
 }
