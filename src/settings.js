@@ -18,7 +18,7 @@ ui.saveChangesBtn.addEventListener("click", async (e) => {
   if (settingsChecked) {
     currUser.username = ui.newUsername.value;
     currUser.password = ui.newPassword.value;
-    await userService.updateUser(currUserId, currUser);
+    await userService.saveUser(currUser);
     settingsChecked = null;
   } else if (settingsChecked === null) {
     e.preventDefault();

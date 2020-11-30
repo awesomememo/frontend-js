@@ -13,17 +13,13 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
   const currUser = await userService.getUserById(currUserId);
   ui.logIn(currUser.username);
+  const numStreakInSevenDays = Math.min(currUser.currStreak, 7);
+  ui.paintStreak(numStreakInSevenDays);
 });
 
 ui.logoutBtn.addEventListener("click", () => {
   ui.logout();
   localStorage.removeItem(CURR_USER_KEY);
-});
-
-userService.getUserById(localStorage.getItem(CURR_USER_KEY)).then((userObj) => {
-  const numStreakInSevenDays = Math.min(userObj.streak, 7);
-
-  ui.paintStreak(numStreakInSevenDays);
 });
 
 Util.closeNavbarAtClickOutside();

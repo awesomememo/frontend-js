@@ -111,3 +111,6 @@ db
 
 # mac os
 *.DS_Store*
+
+# build
+build/
