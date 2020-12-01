@@ -1,5 +1,6 @@
 import Item from "../model/Item";
 import Util from "../lib/Util";
+import { MAX_SOUND_CHUNK_LENGTH } from "../Constant";
 
 export default class InsertWordUI {
   constructor(document) {
@@ -33,23 +34,37 @@ export default class InsertWordUI {
 
   init() {
     // 1. Initalize audio stream into mediaRecorder
-    navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then((stream) => {
-      this.mediaRecorder = new MediaRecorder(stream);
+    navigator.mediaDevices
+      .getUserMedia({ audio: true, video: false })
+      .then((stream) => {
+        this.mediaRecorder = new MediaRecorder(stream);
 
-      this.mediaRecorder.addEventListener("dataavailable", (e) => {
-        this.chunks.push(e.data);
+        this.mediaRecorder.addEventListener("dataavailable", (e) => {
+          this.chunks.push(e.data);
+        });
+
+        // 1.1 Create Blob, feed to file reader, and attach to audio player
+        this.mediaRecorder.addEventListener("stop", () => {
+          const soundSize = this.chunks.reduce(
+            (size, data) => size + data.size,
+            0
+          );
+          if (soundSize > MAX_SOUND_CHUNK_LENGTH) {
+            this.showAlert(
+              "Sound Recording is too long. Please Redo!",
+              "danger"
+            );
+            this.chunks = [];
+            return;
+          }
+          const blob = new Blob(this.chunks, { type: this.contentType });
+
+          this.fileReader.readAsDataURL(blob);
+          this.chunks = [];
+          const audioUrl = window.URL.createObjectURL(blob);
+          this.player.src = audioUrl;
+        });
       });
-
-      // 1.1 Create Blob, feed to file reader, and attach to audio player
-      this.mediaRecorder.addEventListener("stop", () => {
-        const blob = new Blob(this.chunks, { type: this.contentType });
-
-        this.fileReader.readAsDataURL(blob);
-        this.chunks = [];
-        const audioUrl = window.URL.createObjectURL(blob);
-        this.player.src = audioUrl;
-      });
-    });
 
     // 2. Get encoded64 audio string
     this.fileReader.addEventListener("loadend", () => {
@@ -83,14 +98,23 @@ export default class InsertWordUI {
       return false;
     }
 
-    if (!this.itemDescription.value && !this.exampleSentence.value && !this.player.src) {
+    if (
+      !this.itemDescription.value &&
+      !this.exampleSentence.value &&
+      !this.player.src
+    ) {
       return false;
     }
     return true;
   }
 
   checkIfInputFilled() {
-    if (!this.item.value && !this.itemDescription.value && !this.exampleSentence.value && !this.player.src) {
+    if (
+      !this.item.value &&
+      !this.itemDescription.value &&
+      !this.exampleSentence.value &&
+      !this.player.src
+    ) {
       return false;
     }
     return true;
@@ -110,7 +134,11 @@ export default class InsertWordUI {
   }
 
   showAlert(alertMessage, alertType) {
-    if (this.document.getElementsByClassName(`alert alert-dismissible alert-${alertType}`)[0]) {
+    if (
+      this.document.getElementsByClassName(
+        `alert alert-dismissible alert-${alertType}`
+      )[0]
+    ) {
       return;
     }
 

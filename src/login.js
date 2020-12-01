@@ -9,9 +9,6 @@ let loginSuccess = null;
 
 ui.loginBtn.addEventListener("click", async (e) => {
   if (loginSuccess) {
-    const user = await userService.getUserByEmail(ui.email.value);
-    ui.clearInputs();
-    localStorage.setItem(CURR_USER_KEY, user.id);
     loginSuccess = null;
   } else if (loginSuccess === null) {
     e.preventDefault();
@@ -37,7 +34,10 @@ ui.loginBtn.addEventListener("click", async (e) => {
       ui.loginBtn.click();
       return;
     }
+    
     loginSuccess = true;
+    ui.clearInputs();
+    localStorage.setItem(CURR_USER_KEY, user.id);
     ui.loginBtn.click();
   } else {
     e.preventDefault();

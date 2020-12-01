@@ -1,12 +1,13 @@
 import { SECONDS_IN_A_DAY } from "../Constant";
+import Streak from "./Streak";
 
 export default class User {
   constructor(username, email, password) {
     this.username = username;
     this.email = email;
     this.password = password;
-    this.streak = 0;
-    this.streakArray = [];
+    this.currStreak = 0;
+    this.streaks = [];
     this.longestStreak = 0;
   }
 
@@ -15,40 +16,46 @@ export default class User {
   }
 
   findDaysApart(date) {
-    if (this.streakArray.length === 0) {
+    if (this.streaks.length === 0) {
       return 0;
     }
-    return (date - new Date(this.streakArray[this.streakArray.length - 1])) / SECONDS_IN_A_DAY;
+    return (
+      (date - this.streaks[this.streaks.length - 1].date) / SECONDS_IN_A_DAY
+    );
   }
 
   updateStreak(date) {
-    if (this.streakArray.length === 0) {
-      this.streakArray.push(date.toISOString());
-      this.streak = 1;
+    const streak = new Streak(this.id, date);
+    if (this.streaks.length === 0) {
+      this.streaks.push(streak);
+      this.currStreak = 1;
       this.longestStreak = 1;
       return;
     }
 
     const numDaysApart = this.findDaysApart(date);
 
-    if (this.streakArray[this.streakArray.length - 1] !== date.toISOString()) {
-      this.streakArray.push(date.toISOString());
+    if (numDaysApart > 0) {
+      this.streaks.push(streak);
 
       if (numDaysApart > 1) {
-        this.streak = 1;
+        this.currStreak = 1;
       }
 
       if (numDaysApart === 1) {
-        this.streak++;
+        this.currStreak++;
       }
 
-      if (this.streak > this.longestStreak) {
-        this.longestStreak = this.streak;
+      if (this.currStreak > this.longestStreak) {
+        this.longestStreak = this.currStreak;
       }
     }
   }
 
   static parseJSON(plainObj) {
-    return Object.assign(new User(), plainObj);
+    const user = Object.assign(new User(), plainObj);
+    const streaks = user.streaks.map(Streak.parseJSON);
+    user.streaks = streaks;
+    return user;
   }
 }

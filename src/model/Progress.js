@@ -1,10 +1,21 @@
 export default class Progress {
-  constructor(time, isPass) {
+  constructor(time, pass, itemId) {
     this.time = time;
-    this.isPass = isPass;
+    this.pass = pass;
+    this.itemId = itemId;
+  }
+
+  setId(id) {
+    this.id = id;
   }
 
   static parseJSON(plainObj) {
-    return Object.assign(new Progress(), plainObj);
+    const progress = new Progress(
+      new Date(plainObj.time),
+      plainObj.pass,
+      plainObj.itemId
+    );
+    progress.setId(plainObj.id);
+    return progress;
   }
 }

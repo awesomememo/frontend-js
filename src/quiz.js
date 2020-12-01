@@ -16,7 +16,9 @@ userService.getUserById(userId).then((user) => {
 
   async function* wordGenerator() {
     while (true) {
-      const wordArray = await wordService.getTodayWordByUserId(JSON.parse(localStorage.getItem(CURR_USER_KEY)));
+      const wordArray = await wordService.getTodayWordByUserId(
+        JSON.parse(localStorage.getItem(CURR_USER_KEY))
+      );
       if (wordArray.length === 0) {
         return;
       }
@@ -44,11 +46,13 @@ userService.getUserById(userId).then((user) => {
 
       const date = Util.getTodayDate();
       user.updateStreak(date);
-      userService.updateUser(userId, user);
+      const savedUser = userService.saveUser(user);
       return;
     }
 
     wordCount++;
+    const sound = await wordService.getSoundByWordId(word.id);
+    word.sound = sound;
     quizUi.showItem(word);
     correctWord = word;
   }
@@ -60,12 +64,11 @@ userService.getUserById(userId).then((user) => {
     }
 
     if (e.target === quizUi.submitBtn) {
-      const isPass = quizUi.validate(correctWord);
+      const pass = quizUi.validate(correctWord);
       const time = Util.getTodayDate();
-      const progress = new Progress(time, isPass);
-      const id = correctWord.id;
+      const progress = new Progress(time, pass, correctWord.id);
       correctWord.addProgress(progress);
-      wordService.updateWord(id, correctWord);
+      wordService.saveWord(correctWord);
       return;
     }
 

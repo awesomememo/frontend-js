@@ -9,12 +9,6 @@ let registerSuccess = null;
 
 ui.registerBtn.addEventListener("click", async (e) => {
   if (registerSuccess) {
-    const user = ui.createUser();
-    const createdUser = await userService.addUser(user);
-    if (createdUser) {
-      ui.clearInputs();
-      localStorage.setItem(CURR_USER_KEY, createdUser.id);
-    }
     registerSuccess = null;
   } else if (registerSuccess === null) {
     e.preventDefault();
@@ -35,6 +29,9 @@ ui.registerBtn.addEventListener("click", async (e) => {
       ui.registerBtn.click();
       return;
     }
+    const savedUser = await userService.saveUser(user);
+    ui.clearInputs();
+    localStorage.setItem(CURR_USER_KEY, savedUser.id);
     registerSuccess = true;
     ui.registerBtn.click();
   } else {

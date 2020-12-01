@@ -31,6 +31,7 @@ export default class Item {
 
   static parseJSON(plainObj) {
     const item = Object.assign(new Item(), plainObj);
+    item.createTime = new Date(item.createTime);
     const progresses = item.progresses.map(Progress.parseJSON);
     item.progresses = progresses;
     return item;

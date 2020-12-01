@@ -16,9 +16,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 ui.saveChangesBtn.addEventListener("click", async (e) => {
   if (settingsChecked) {
-    currUser.username = ui.newUsername.value;
-    currUser.password = ui.newPassword.value;
-    await userService.updateUser(currUserId, currUser);
     settingsChecked = null;
   } else if (settingsChecked === null) {
     e.preventDefault();
@@ -28,7 +25,9 @@ ui.saveChangesBtn.addEventListener("click", async (e) => {
       return;
     }
 
-    if (!UserService.validatePassword(ui.oldPassword.value, currUser.password)) {
+    if (
+      !UserService.validatePassword(ui.oldPassword.value, currUser.password)
+    ) {
       ui.showPasswordAlert();
       settingsChecked = false;
       ui.saveChangesBtn.click();
@@ -36,6 +35,9 @@ ui.saveChangesBtn.addEventListener("click", async (e) => {
     }
 
     settingsChecked = true;
+    currUser.username = ui.newUsername.value;
+    currUser.password = ui.newPassword.value;
+    await userService.saveUser(currUser);
     ui.saveChangesBtn.click();
   } else {
     e.preventDefault();
