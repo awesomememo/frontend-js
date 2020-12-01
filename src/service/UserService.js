@@ -2,7 +2,7 @@ import md5 from "md5";
 import User from "../model/User";
 import { BASE_URL } from "../Constant";
 
-const userEndpoint = `${BASE_URL}/users`
+const userEndpoint = `${BASE_URL}/users`;
 
 export default class UserService {
   constructor() {}
@@ -13,8 +13,16 @@ export default class UserService {
 
   async saveUser(user) {
     if (!user.id) {
+      // new user, need hash password
       user.password = md5(user.password);
+    } else {
+      const oldUser = await this.getUserById(user.id);
+      if (user.password != oldUser.password) {
+        // old user, but password is updated
+        user.password = md5(user.password);
+      }
     }
+
     const response = await fetch(userEndpoint, {
       method: "POST",
       body: JSON.stringify(user),
