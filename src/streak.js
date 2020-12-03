@@ -9,14 +9,11 @@ const streakUI = new StreakUI(document);
 const userService = new UserService();
 const userId = parseInt(localStorage.getItem(CURR_USER_KEY));
 
-wordService.get().then((words) => {
-  const userWords = words.filter((word) => word.userId === userId);
-  const totalWords = userWords.length;
-
-  userService.getUserById(userId).then((userObj) => {
-    const currStreak = userObj.streak;
-    const longestStreak = userObj.longestStreak;
-    streakUI.paint(currStreak, totalWords, longestStreak);
+wordService.getWordCountByUserId(userId).then((wordCount) => {
+  userService.getUserById(userId).then((user) => {
+    const currStreak = user.currStreak;
+    const longestStreak = user.longestStreak;
+    streakUI.paint(currStreak, wordCount, longestStreak);
   });
 });
 
