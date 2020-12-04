@@ -7,8 +7,9 @@ import UserService from "./service/UserService";
 
 const quizUi = new QuizUI(document);
 const wordService = new WordService();
-const userId = localStorage.getItem(CURR_USER_KEY);
+const userId = JSON.parse(localStorage.getItem(CURR_USER_KEY));
 const userService = new UserService();
+let wordsLeft = -1;
 
 userService.getUserById(userId).then((user) => {
   let correctWord;
@@ -16,9 +17,10 @@ userService.getUserById(userId).then((user) => {
 
   async function* wordGenerator() {
     while (true) {
-      const wordArray = await wordService.getTodayWordByUserId(
-        JSON.parse(localStorage.getItem(CURR_USER_KEY))
-      );
+      const wordArray = await wordService.getTodayWordByUserId(userId);
+      if (wordsLeft === -1) {
+        wordsLeft = wordArray.length;
+      }
       if (wordArray.length === 0) {
         return;
       }
@@ -46,14 +48,15 @@ userService.getUserById(userId).then((user) => {
 
       const date = Util.getTodayDate();
       user.updateStreak(date);
-      const savedUser = userService.saveUser(user);
+      userService.saveUser(user);
       return;
     }
 
     wordCount++;
+
     const sound = await wordService.getSoundByWordId(word.id);
     word.sound = sound;
-    quizUi.showItem(word);
+    quizUi.showItem(word, wordsLeft);
     correctWord = word;
   }
 
@@ -65,6 +68,9 @@ userService.getUserById(userId).then((user) => {
 
     if (e.target === quizUi.submitBtn) {
       const pass = quizUi.validate(correctWord);
+      if (pass) {
+        wordsLeft = wordsLeft - 1;
+      }
       const time = Util.getTodayDate();
       const progress = new Progress(time, pass, correctWord.id);
       correctWord.addProgress(progress);

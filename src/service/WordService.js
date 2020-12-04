@@ -46,9 +46,7 @@ export default class WordService {
 
       const lastProgressDate = new Date(lastProgress.time);
       const todayDate = Util.getTodayDate();
-      const dayDifference = Math.floor(
-        (todayDate - lastProgressDate) / SECONDS_IN_A_DAY
-      );
+      const dayDifference = Math.floor((todayDate - lastProgressDate) / SECONDS_IN_A_DAY);
 
       return MEMORIZATION_DATES.includes(dayDifference);
     });
@@ -57,8 +55,8 @@ export default class WordService {
   }
 
   async getSoundByWordId(id) {
-    const response = await fetch(`${BASE_URL}/items/${id}/sound`)
-    const resText = await response.text()
-    return resText
+    const response = await fetch(`${BASE_URL}/items/${id}/sound`);
+    const resText = await response.text();
+    return resText;
   }
 }

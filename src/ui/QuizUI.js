@@ -25,9 +25,10 @@ export default class QuizUI {
     this.validationBody = document.getElementById("validation-body");
     this.nextBtn = document.getElementById("next-btn");
     this.finishTemplate = document.getElementById("finish");
+    this.wordsLeft = document.getElementById("words-left");
   }
 
-  showItem(item) {
+  showItem(item, wordsLeft) {
     this.clearWordTemplate();
 
     if (item.hint) {
@@ -48,6 +49,8 @@ export default class QuizUI {
       const blob = Util.b64toBlob(item.sound);
       this.audioElement.src = window.URL.createObjectURL(blob);
     }
+
+    this.wordsLeft.textContent = wordsLeft;
   }
 
   validate(item) {
