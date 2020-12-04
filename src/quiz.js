@@ -9,12 +9,7 @@ const quizUi = new QuizUI(document);
 const wordService = new WordService();
 const userId = JSON.parse(localStorage.getItem(CURR_USER_KEY));
 const userService = new UserService();
-let wordsLeft;
-let totalWords;
-
-wordService.getTodayWordByUserId(userId).then((wordArray) => {
-  totalWords = wordArray.length;
-});
+let wordsLeft = 0;
 
 userService.getUserById(userId).then((user) => {
   let correctWord;
@@ -23,6 +18,9 @@ userService.getUserById(userId).then((user) => {
   async function* wordGenerator() {
     while (true) {
       const wordArray = await wordService.getTodayWordByUserId(userId);
+      if (wordsLeft === 0) {
+        wordsLeft = wordArray.length;
+      }
       if (wordArray.length === 0) {
         return;
       }
@@ -30,28 +28,6 @@ userService.getUserById(userId).then((user) => {
         yield word;
       }
     }
-  }
-
-  async function findWordsLeft() {
-    const wordArray = await wordService.getTodayWordByUserId(userId);
-    wordsLeft = wordArray.filter((item) => {
-      if (item.progresses.length === 0) {
-        return true;
-      }
-
-      return item.progresses[item.progresses.length - 1].time !== Util.getTodayDate().toISOString();
-    }).length;
-
-    wordArray.forEach((item) => {
-      if (item.progresses.length === 0) {
-        return;
-      }
-
-      if (item.progresses[item.progresses.length - 1].time === Util.getTodayDate().toISOString() && item.progresses[item.progresses.length - 1].isPass === false) {
-        totalWords++;
-        wordsLeft++;
-      }
-    });
   }
 
   const generator = wordGenerator();
@@ -72,7 +48,7 @@ userService.getUserById(userId).then((user) => {
 
       const date = Util.getTodayDate();
       user.updateStreak(date);
-      const savedUser = userService.saveUser(user);
+      userService.saveUser(user);
       return;
     }
 
@@ -80,21 +56,21 @@ userService.getUserById(userId).then((user) => {
 
     const sound = await wordService.getSoundByWordId(word.id);
     word.sound = sound;
-    const finishedWords = totalWords - wordsLeft;
-    quizUi.showItem(word, finishedWords, totalWords);
+    quizUi.showItem(word, wordsLeft);
     correctWord = word;
   }
 
   quizUi.quizMain.addEventListener("click", (e) => {
     if (e.target === quizUi.startBtn || e.target === quizUi.nextBtn) {
-      findWordsLeft().then(() => {
-        showWord();
-      });
+      showWord();
       return;
     }
 
     if (e.target === quizUi.submitBtn) {
       const pass = quizUi.validate(correctWord);
+      if (pass) {
+        wordsLeft = wordsLeft - 1;
+      }
       const time = Util.getTodayDate();
       const progress = new Progress(time, pass, correctWord.id);
       correctWord.addProgress(progress);

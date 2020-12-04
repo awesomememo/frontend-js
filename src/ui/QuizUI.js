@@ -25,11 +25,10 @@ export default class QuizUI {
     this.validationBody = document.getElementById("validation-body");
     this.nextBtn = document.getElementById("next-btn");
     this.finishTemplate = document.getElementById("finish");
-    this.finishedWords = document.getElementById("words-done");
-    this.totalWords = document.getElementById("total-words");
+    this.wordsLeft = document.getElementById("words-left");
   }
 
-  showItem(item, wordsLeft, totalNumWords) {
+  showItem(item, wordsLeft) {
     this.clearWordTemplate();
 
     if (item.hint) {
@@ -51,8 +50,7 @@ export default class QuizUI {
       this.audioElement.src = window.URL.createObjectURL(blob);
     }
 
-    this.finishedWords.textContent = wordsLeft;
-    this.totalWords.textContent = totalNumWords;
+    this.wordsLeft.textContent = wordsLeft;
   }
 
   validate(item) {
