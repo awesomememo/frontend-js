@@ -9,7 +9,7 @@ const quizUi = new QuizUI(document);
 const wordService = new WordService();
 const userId = JSON.parse(localStorage.getItem(CURR_USER_KEY));
 const userService = new UserService();
-let wordsLeft = 0;
+let wordsLeft = -1;
 
 userService.getUserById(userId).then((user) => {
   let correctWord;
@@ -18,7 +18,7 @@ userService.getUserById(userId).then((user) => {
   async function* wordGenerator() {
     while (true) {
       const wordArray = await wordService.getTodayWordByUserId(userId);
-      if (wordsLeft === 0) {
+      if (wordsLeft === -1) {
         wordsLeft = wordArray.length;
       }
       if (wordArray.length === 0) {
