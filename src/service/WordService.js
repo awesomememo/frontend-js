@@ -44,11 +44,8 @@ export default class WordService {
         return true;
       }
 
-      const lastProgressDate = new Date(lastProgress.time);
-      const todayDate = Util.getTodayDate();
-      const dayDifference = Math.floor((todayDate - lastProgressDate) / SECONDS_IN_A_DAY);
-
-      return MEMORIZATION_DATES.includes(dayDifference);
+      const daysDone = progresses.filter((progress) => progress.pass === true).length
+      return MEMORIZATION_DATES.includes(daysDone);
     });
 
     return todayWordArray;
