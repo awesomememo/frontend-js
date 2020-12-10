@@ -34,21 +34,26 @@ export default class WordService {
   async getTodayWordByUserId(userId) {
     const wordArray = await this.getAllWordsByUserId(userId);
     const todayWordArray = wordArray.filter((word) => {
+      // new word, never did before
       const progresses = word.progresses;
       if (progresses.length === 0) {
         return true;
       }
 
+      // last time, this word failed
       const lastProgress = progresses[progresses.length - 1];
       if (!lastProgress.pass) {
         return true;
       }
 
-      const daysDone = progresses.filter((progress) => progress.pass === true).length
-      return MEMORIZATION_DATES.includes(daysDone);
+      const daysDone = progresses.filter((progress) => progress.pass).length;
+      const requiredMemorizationDaysApart = MEMORIZATION_DATES[daysDone - 1];
+      const actualDaysApart = (Util.getTodayDate() - word.createTime) / SECONDS_IN_A_DAY;
+
+      return actualDaysApart >= requiredMemorizationDaysApart;
     });
 
-    return todayWordArray;
+    return todayWordArray.sort(() => Math.random - 0.5);
   }
 
   async getSoundByWordId(id) {
