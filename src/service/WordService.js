@@ -53,7 +53,7 @@ export default class WordService {
       return actualDaysApart >= requiredMemorizationDaysApart;
     });
 
-    return todayWordArray.sort(() => Math.random - 0.5);
+    return todayWordArray.sort(() => Math.random() - 0.5);
   }
 
   async getSoundByWordId(id) {
